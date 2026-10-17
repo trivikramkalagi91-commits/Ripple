@@ -220,21 +220,26 @@
 <div style="background:var(--bg);min-height:100%;">
 
   <!-- Navigation Bar -->
-  <header style="position:sticky;top:0;z-index:50;background:rgba(250,251,252,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);">
-    <div style="max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="logo.png" alt="Ripple Logo" style="width:34px;height:28px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));">
-        <span class="font-display" style="font-size:20px;">Ripple</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:32px;">
+  <header style="position:sticky;top:0;z-index:50;background:rgba(250,250,249,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);">
+    <div style="width:100%;padding:0 36px;display:flex;align-items:center;justify-content:space-between;height:68px;">
+      <!-- Extreme Left: Logo and Brand -->
+      <a href="#" style="display:flex;align-items:center;gap:12px;">
+        <img src="logo.png" alt="Ripple Logo" style="width:36px;height:30px;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.15));">
+        <span class="font-display" style="font-size:22px;letter-spacing:-0.02em;">Ripple</span>
+      </a>
+
+      <!-- Center Links -->
+      <nav style="display:flex;align-items:center;gap:36px;">
         <a href="#problem" class="nav-link">Problem</a>
         <a href="#architecture" class="nav-link">How It Works</a>
         <a href="#tools" class="nav-link">MCP Tools</a>
         <a href="#graph" class="nav-link">FalkorDB Graph</a>
         <a href="#quickstart" class="nav-link">Quickstart</a>
-      </div>
-      <a href="https://github.com/trivikramkalagi91-commits/Ripple" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;background:var(--text);color:#FFFFFF;font-size:13.5px;font-weight:600;">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </nav>
+
+      <!-- Extreme Right: GitHub CTA -->
+      <a href="https://github.com/trivikramkalagi91-commits/Ripple" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:100px;background:var(--text);color:#FFFFFF;font-size:13.5px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s ease;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         GitHub
       </a>
     </div>
@@ -458,6 +463,40 @@
     </div>
   </section>
 
+  <!-- Middle Big Logo Showcase Section -->
+  <section style="padding:60px 24px;background:#F4F4F5;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;text-align:left;">
+      <div style="position:relative;">
+        <div style="position:absolute;inset:-20px;background:radial-gradient(circle, rgba(79,70,229,0.12), transparent 70%);border-radius:50%;filter:blur(10px);"></div>
+        <img src="logo.png" alt="Ripple Neural Brain" style="width:190px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 16px 30px rgba(0,0,0,0.12));transform:rotate(-2deg);">
+      </div>
+      <div style="max-width:540px;">
+        <div class="eyebrow" style="margin-bottom:10px;color:var(--accent-2);">Neural Code Intelligence</div>
+        <h3 class="font-display" style="font-size:clamp(26px,3vw,34px);line-height:1.2;margin:0 0 14px;letter-spacing:-0.01em;">
+          Giving AI agents a persistent brain for your repository.
+        </h3>
+        <p style="font-size:15px;color:var(--ink-2);line-height:1.7;margin:0 0 20px;">
+          Most coding agents forget the codebase structure the moment they switch context. 
+          Ripple connects directly to <strong>FalkorDB</strong>, creating an external knowledge cortex that indexes imports, re-exports, and aliases into an immutable property graph.
+        </p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Sub-10ms Graph Traversal
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            100% Native Stdio MCP
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero AI Regressions
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FalkorDB Architecture -->
   <section id="architecture" style="padding:72px 24px;">
     <div style="max-width:1040px;margin:0 auto;">
@@ -502,18 +541,22 @@
       </div>
       <!-- Graph Visualization Panel -->
       <div style="margin-top:16px;padding:28px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
           <div>
             <div style="font-weight:600;font-size:16px;margin-bottom:4px;">Interactive Graph Browser</div>
             <div style="font-size:13px;color:var(--muted);">Force-directed network view of your codebase at localhost:3000</div>
           </div>
-          <div style="display:flex;gap:20px;font-size:12.5px;">
-            <span style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent);"></span>128 Nodes</span>
-            <span style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--accent-2);"></span>445 Edges</span>
+          <!-- Clean floating legend completely outside the SVG canvas -->
+          <div style="display:flex;align-items:center;gap:18px;padding:6px 16px;border-radius:100px;background:#F4F4F5;border:1px solid var(--border);font-size:12px;font-weight:500;">
+            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#EA580C;"></span>Target (api.ts)</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#4F46E5;"></span>Hop 1</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#818CF8;"></span>Hop 2</span>
+            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:rgba(24,24,27,0.25);"></span>Hop 3+</span>
           </div>
         </div>
-        <!-- SVG Graph Visualization -->
-        <svg viewBox="0 0 900 300" style="width:100%;height:300px;display:block;">
+
+        <!-- SVG Graph Visualization (Unobstructed full canvas) -->
+        <svg viewBox="0 0 900 280" style="width:100%;height:280px;display:block;">
           <defs>
             <radialGradient id="ng1" cx="50%" cy="50%" r="50%">
               <stop offset="0%" style="stop-color:#818CF8;stop-opacity:1"/>
@@ -524,67 +567,55 @@
               <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1"/>
             </radialGradient>
             <radialGradient id="ng3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#F97316;stop-opacity:1"/>
-              <stop offset="100%" style="stop-color:#C2410C;stop-opacity:1"/>
+              <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1"/>
+              <stop offset="100%" style="stop-color:#EA580C;stop-opacity:1"/>
             </radialGradient>
           </defs>
           <!-- Edges -->
           <g stroke="rgba(24,24,27,0.12)" stroke-width="1.2">
-            <line x1="450" y1="150" x2="180" y2="70"/>
-            <line x1="450" y1="150" x2="720" y2="70"/>
-            <line x1="450" y1="150" x2="150" y2="220"/>
-            <line x1="450" y1="150" x2="750" y2="220"/>
-            <line x1="450" y1="150" x2="300" y2="250"/>
-            <line x1="450" y1="150" x2="620" y2="250"/>
-            <line x1="180" y1="70" x2="80" y2="40"/>
-            <line x1="180" y1="70" x2="280" y2="30"/>
-            <line x1="720" y1="70" x2="820" y2="40"/>
-            <line x1="720" y1="70" x2="620" y2="30"/>
-            <line x1="150" y1="220" x2="60" y2="260"/>
-            <line x1="750" y1="220" x2="840" y2="260"/>
-            <line x1="300" y1="250" x2="220" y2="285"/>
-            <line x1="620" y1="250" x2="700" y2="285"/>
-            <line x1="80" y1="40" x2="40" y2="90"/>
-            <line x1="280" y1="30" x2="340" y2="80"/>
-            <line x1="820" y1="40" x2="870" y2="95"/>
-            <line x1="620" y1="30" x2="560" y2="85"/>
+            <line x1="450" y1="140" x2="180" y2="60"/>
+            <line x1="450" y1="140" x2="720" y2="60"/>
+            <line x1="450" y1="140" x2="150" y2="210"/>
+            <line x1="450" y1="140" x2="750" y2="210"/>
+            <line x1="450" y1="140" x2="300" y2="240"/>
+            <line x1="450" y1="140" x2="620" y2="240"/>
+            <line x1="180" y1="60" x2="80" y2="35"/>
+            <line x1="180" y1="60" x2="280" y2="25"/>
+            <line x1="720" y1="60" x2="820" y2="35"/>
+            <line x1="720" y1="60" x2="620" y2="25"/>
+            <line x1="150" y1="210" x2="60" y2="250"/>
+            <line x1="750" y1="210" x2="840" y2="250"/>
+            <line x1="300" y1="240" x2="220" y2="270"/>
+            <line x1="620" y1="240" x2="700" y2="270"/>
+            <line x1="80" y1="35" x2="35" y2="85"/>
+            <line x1="280" y1="25" x2="340" y2="75"/>
+            <line x1="820" y1="35" x2="870" y2="90"/>
+            <line x1="620" y1="25" x2="560" y2="80"/>
           </g>
           <!-- Central Target Node -->
-          <circle cx="450" cy="150" r="22" fill="url(#ng3)" stroke="#9A3412" stroke-width="2"/>
-          <text x="450" y="154" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="white" font-weight="600">api.ts</text>
+          <circle cx="450" cy="140" r="22" fill="url(#ng3)" stroke="#9A3412" stroke-width="2"/>
+          <text x="450" y="144" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="white" font-weight="600">api.ts</text>
           <!-- Hop 1 -->
-          <circle cx="180" cy="70" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="720" cy="70" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="150" cy="220" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="750" cy="220" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="300" cy="250" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="620" cy="250" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="180" cy="60" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="720" cy="60" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="150" cy="210" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="750" cy="210" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="300" cy="240" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
+          <circle cx="620" cy="240" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
           <!-- Hop 2 -->
-          <circle cx="80" cy="40" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="280" cy="30" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="820" cy="40" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="620" cy="30" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="60" cy="260" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="840" cy="260" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="220" cy="285" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="700" cy="285" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="80" cy="35" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="280" cy="25" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="820" cy="35" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="620" cy="25" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="60" cy="250" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="840" cy="250" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="220" cy="270" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
+          <circle cx="700" cy="270" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
           <!-- Hop 3 -->
-          <circle cx="40" cy="90" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="340" cy="80" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="870" cy="95" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="560" cy="85" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <!-- Legend positioned neatly in the top-right corner with a sleek pill container -->
-          <g transform="translate(630, 18)">
-            <rect x="0" y="0" width="250" height="28" rx="6" fill="#FFFFFF" stroke="rgba(24,24,27,0.12)" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.04))"/>
-            <circle cx="16" cy="14" r="5" fill="url(#ng3)"/>
-            <text x="26" y="17.5" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#27272A">Target</text>
-            <circle cx="78" cy="14" r="5" fill="url(#ng1)"/>
-            <text x="88" y="17.5" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#27272A">Hop 1</text>
-            <circle cx="138" cy="14" r="5" fill="url(#ng2)"/>
-            <text x="148" y="17.5" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#27272A">Hop 2</text>
-            <circle cx="198" cy="14" r="5" fill="rgba(24,24,27,0.2)"/>
-            <text x="208" y="17.5" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#71717A">Hop 3+</text>
-          </g>
+          <circle cx="35" cy="85" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
+          <circle cx="340" cy="75" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
+          <circle cx="870" cy="90" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
+          <circle cx="560" cy="80" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
         </svg>
       </div>
     </div>
