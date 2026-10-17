@@ -1,0 +1,24 @@
+Ripple — Launch Video Share Copy
+================================
+
+Twitter/X:
+Never let your AI coding agent edit code in the dark.
+Ripple gives agents real-time dependency graph intelligence powered by FalkorDB over MCP — before a single line is modified.
+Open source. Built for Graph Hacks.
+github.com/trivikramkalagi91-commits/Ripple
+
+LinkedIn:
+We've all seen it: an AI coding agent edits one file, and 58 consumers break 4 hops away. Grep can't solve this. Barrel re-exports and path aliases mask the real dependency chains.
+
+Ripple is an MCP server that indexes your codebase into FalkorDB as a connected property graph. Before any change, agents query the real blast radius, trace the shortest import chain, and apply edits in safe topological order.
+
+Built for Graph Hacks — Track 1: Agents That Act on Connected Data. Open source, TypeScript, FalkorDB, MCP.
+
+GitHub: github.com/trivikramkalagi91-commits/Ripple
+
+Product Hunt:
+Tagline: Dependency graph intelligence for AI coding agents.
+Description: Ripple gives AI coding agents real-time blast radius analysis powered by FalkorDB over MCP. Never let an agent edit code in the dark again.
+
+Hacker News:
+Show HN: Ripple – Give AI coding agents real-time dependency graph intelligence (FalkorDB + MCP)
