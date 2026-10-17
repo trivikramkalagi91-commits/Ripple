@@ -36,15 +36,27 @@ AI coding agents query Ripple *before* making changes to know the real blast rad
 
 ---
 
-## 🚀 Quickstart
+## 🚀 First-Time User Setup Guide (3 Minutes)
 
-### 1. Start FalkorDB
+Follow these 4 simple steps to get Ripple up and running:
+
+### Step 1: Start FalkorDB
+Ripple requires FalkorDB to store and query the dependency graph. Choose whichever option you prefer:
+
+#### Option A: Local Docker (Recommended)
+Run this single command to start FalkorDB and keep it running automatically in the background across reboots:
 ```bash
-docker run -p 6379:6379 -p 3000:3000 -it --rm falkordb/falkordb:latest
+docker run -d --name falkordb --restart unless-stopped -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest
 ```
-*(FalkorDB Browser UI is available at `http://localhost:3000`)*
+- **Graph Database**: `localhost:6379`
+- **Interactive Visual Browser**: [http://localhost:3000](http://localhost:3000) (select graph `ripple` to explore your codebase visually)
 
-### 2. Install & Build Ripple
+#### Option B: FalkorDB Cloud (No Docker needed)
+If you don't use Docker, create a free instance at [app.falkordb.cloud](https://app.falkordb.cloud) and pass your host/password via environment variables.
+
+---
+
+### Step 2: Clone and Build Ripple
 ```bash
 git clone https://github.com/trivikramkalagi91-commits/Ripple.git
 cd Ripple
@@ -52,40 +64,28 @@ npm install
 npm run build
 ```
 
-### 3. Index Any Repository
-Index any TypeScript/JavaScript project into FalkorDB in seconds:
+---
+
+### Step 3: Index Your Project Repository
+Run the indexer pointing to the TypeScript or JavaScript codebase you want your AI agent to work on:
 ```bash
-node dist/cli.js index <path-to-target-repo>
+node dist/cli.js index C:/path/to/your/project
 ```
-
-### 4. Query from CLI
-```bash
-# Calculate blast radius:
-node dist/cli.js query blast_radius src/types/api.ts
-
-# Explain dependency chain:
-node dist/cli.js query why_affected src/main.tsx src/utils/cn.ts
-
-# View architectural risk hotspots:
-node dist/cli.js query risk_hotspots
-
-# Get safe edit sequence:
-node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
-```
+*Tip: You only need to run this command once (or when major architectural changes occur). Ripple will parse the AST, resolve all barrel files and `@/` aliases, and construct the graph in FalkorDB in seconds.*
 
 ---
 
-## 🤖 Connecting to Your AI Agent (MCP Config)
+### Step 4: Connect Ripple to Your AI Editor (MCP Configuration)
+Add Ripple to your AI tool's MCP configuration file (e.g. Cursor, Claude Desktop, Antigravity IDE, or VS Code):
 
-Add Ripple to your MCP configuration (e.g., `mcp_config.json`, Cursor, Claude Desktop, or Antigravity IDE):
-
+#### Cursor / Claude Desktop / Antigravity IDE (`mcp_config.json`)
 ```json
 {
   "mcpServers": {
     "ripple": {
       "command": "node",
       "args": [
-        "<FULL_PATH_TO_RIPPLE>/dist/server.js"
+        "C:/path/to/Ripple/dist/server.js"
       ],
       "env": {}
     }
@@ -93,11 +93,41 @@ Add Ripple to your MCP configuration (e.g., `mcp_config.json`, Cursor, Claude De
 }
 ```
 
-### Enforcement Rule for AI Agents
-Add this to your target project's `AGENTS.md` or `CLAUDE.md`:
+#### Optional: Add the Agent Enforcement Rule
+Add this to your project repository's `AGENTS.md` (or `CLAUDE.md` / `.cursorrules`):
 ```markdown
-Before modifying, renaming, or updating the signature of any exported type, component, or function,
-you MUST call the `blast_radius` MCP tool on its file and ensure all downstream affected files are updated.
+# Ripple Blast Radius Enforcement
+Before modifying, renaming, or refactoring any exported function, type, or component,
+you MUST invoke the `blast_radius` MCP tool on its file and ensure all downstream affected files are updated.
+```
+
+---
+
+## 💡 How It Works In Practice
+Once installed, **you don't have to run any CLI commands during your daily coding!**
+1. You chat with your AI agent as usual:
+   > *"Hey, please update `src/types/api.ts` to rename `id` to `entityId`."*
+2. Your AI agent automatically checks the Ripple MCP tool behind the scenes:
+   - It queries FalkorDB: `blast_radius('src/types/api.ts')`.
+   - It sees that 58 downstream files across 4 hop distances depend on this type.
+   - It updates the target file and all downstream consumers in `safe_edit_order` so nothing breaks!
+
+---
+
+## 🔍 Optional: Inspecting & Querying from CLI (For Developers)
+If you want to query the graph directly in your terminal without an AI:
+```bash
+# Calculate blast radius:
+node dist/cli.js query blast_radius src/types/api.ts
+
+# Trace the shortest dependency chain between two files:
+node dist/cli.js query why_affected src/main.tsx src/utils/cn.ts
+
+# List architectural risk hotspots:
+node dist/cli.js query risk_hotspots
+
+# Get safe topological edit order:
+node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
 ```
 
 ---
