@@ -1,0 +1,11 @@
+{
+  "buildCommand": "echo 'Static landing page'",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    }
+  ]
+}
