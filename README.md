@@ -1,11 +1,20 @@
-# Ripple 🌊
-
-> **FalkorDB-powered dependency graph and blast radius analyzer for AI coding agents.**  
-> Built for the **Graph Hacks Hackathon (Track 1: Agents that act on connected data)**.
+<div align="center">
+  <img src="logo.png" alt="Ripple Logo" width="140" />
+  <h1>Ripple</h1>
+  <p><strong>FalkorDB-Powered Dependency Graph & Blast Radius Intelligence for AI Coding Agents</strong></p>
+  <p>
+    <a href="https://ripple-graph.vercel.app"><strong>Live Website</strong></a> &bull;
+    <a href="https://github.com/trivikramkalagi91-commits/Ripple"><strong>GitHub</strong></a> &bull;
+    <a href="https://www.falkordb.com/"><strong>FalkorDB</strong></a>
+  </p>
+  <p>
+    <em>Built for the <strong>Graph Hacks Hackathon (Track 1: Agents that act on connected data)</strong></em>
+  </p>
+</div>
 
 ---
 
-## 💥 The Problem: Coding Agents Break Code in the Dark
+## The Problem: Coding Agents Break Code in the Dark
 When AI coding agents (Claude, Cursor, Copilot, Antigravity) edit or refactor code in large codebases, they operate with a narrow view. A simple change to a core interface, utility function, or barrel export silently breaks consumers 2, 3, or 4 hops away.
 
 Plain text search / grep cannot solve this:
@@ -15,7 +24,7 @@ Plain text search / grep cannot solve this:
 
 ---
 
-## ⚡ The Solution: Ripple
+## The Solution: Ripple
 **Ripple** is a high-performance Model Context Protocol (MCP) server powered by **FalkorDB**. It ingests a repository AST into a connected property graph:
 - **Nodes**: `(:File {path, loc})`
 - **Edges**: `(:File)-[:IMPORTS]->(:File)`
@@ -23,9 +32,14 @@ Plain text search / grep cannot solve this:
 
 AI coding agents query Ripple *before* making changes to know the real blast radius, the exact shortest import chain, and the safe topological edit order.
 
+<div align="center">
+  <img src="falkordb-graph.png" alt="FalkorDB Dependency Graph" width="750" />
+  <p><em>Force-directed dependency graph of 128 nodes and 445 edges running live in FalkorDB Browser</em></p>
+</div>
+
 ---
 
-## 🛠️ The 4 MCP Tools
+## The 4 MCP Tools
 
 | Tool | When AI Coding Agents Call It | What It Returns |
 | :--- | :--- | :--- |
@@ -36,7 +50,7 @@ AI coding agents query Ripple *before* making changes to know the real blast rad
 
 ---
 
-## 🚀 First-Time User Setup Guide (3 Minutes)
+## First-Time User Setup Guide (3 Minutes)
 
 Follow these 4 simple steps to get Ripple up and running:
 
@@ -103,7 +117,7 @@ you MUST invoke the `blast_radius` MCP tool on its file and ensure all downstrea
 
 ---
 
-## 💡 How It Works In Practice
+## How It Works In Practice
 Once installed, **you don't have to run any CLI commands during your daily coding!**
 1. You chat with your AI agent as usual:
    > *"Hey, please update `src/types/api.ts` to rename `id` to `entityId`."*
@@ -114,7 +128,7 @@ Once installed, **you don't have to run any CLI commands during your daily codin
 
 ---
 
-## 🔍 Optional: Inspecting & Querying from CLI (For Developers)
+## Optional: Inspecting & Querying from CLI (For Developers)
 If you want to query the graph directly in your terminal without an AI:
 ```bash
 # Calculate blast radius:
@@ -132,7 +146,8 @@ node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
 
 ---
 
-## 🏆 Hackathon Details
+## Hackathon Details
+- **Project Website**: [https://ripple-graph.vercel.app](https://ripple-graph.vercel.app)
 - **Event**: Graph Hacks
-- **Track**: Track 1 — Agents that act on connected data, powered by FalkorDB
+- **Track**: Track 1 &mdash; Agents that act on connected data, powered by FalkorDB
 - **Built with**: FalkorDB, TypeScript, ts-morph, @modelcontextprotocol/sdk
