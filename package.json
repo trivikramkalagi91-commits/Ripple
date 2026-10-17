@@ -1,0 +1,29 @@
+{
+  "name": "ripple",
+  "version": "0.1.0",
+  "description": "FalkorDB-powered dependency graph and blast radius analyzer for AI coding agents",
+  "main": "dist/index.js",
+  "bin": {
+    "ripple": "dist/cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "index": "node dist/cli.js index",
+    "start": "node dist/server.js"
+  },
+  "keywords": ["mcp", "falkordb", "graph", "blast-radius", "code-intelligence"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "commander": "^13.1.0",
+    "falkordb": "^6.8.0",
+    "ts-morph": "^25.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
+  }
+}
