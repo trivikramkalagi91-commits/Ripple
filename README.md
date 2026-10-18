@@ -7,9 +7,6 @@
     <a href="https://github.com/trivikramkalagi91-commits/Ripple"><strong>GitHub</strong></a> &bull;
     <a href="https://www.falkordb.com/"><strong>FalkorDB</strong></a>
   </p>
-  <p>
-    <em>Built for the <strong>Graph Hacks Hackathon (Track 1: Agents that act on connected data)</strong></em>
-  </p>
 </div>
 
 ---
@@ -146,8 +143,7 @@ node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
 
 ---
 
-## Hackathon Details
-- **Project Website**: [https://ripple-graph.vercel.app](https://ripple-graph.vercel.app)
-- **Event**: Graph Hacks
-- **Track**: Track 1 &mdash; Agents that act on connected data, powered by FalkorDB
+## Project Info
+- **Live Website**: [https://ripple-graph.vercel.app](https://ripple-graph.vercel.app)
 - **Built with**: FalkorDB, TypeScript, ts-morph, @modelcontextprotocol/sdk
+- **License**: MIT

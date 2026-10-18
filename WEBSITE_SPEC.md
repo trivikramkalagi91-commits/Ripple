@@ -46,7 +46,7 @@ This document contains the complete aesthetic design system, component hierarchy
 ---
 
 ### 2. Hero Section
-- **Badge Pill**: `🏆 Built for Graph Hacks — Track 1: Agents That Act on Connected Data`
+- **Badge Pill**: `FalkorDB Powered — Graph Intelligence for Coding Agents`
 - **Headline (Playfair Display)**:  
   *Never let your AI coding agent edit code in the dark.*
 - **Subheadline**:  
@@ -138,7 +138,7 @@ This document contains the complete aesthetic design system, component hierarchy
 
 ---
 
-### 7. Footer & Hackathon Badge
+### 7. Footer
 - **Logo Mark**: `Ripple 🌊`
-- **Hackathon Info**: Graph Hacks 2026 — Track 1 (FalkorDB Connected Data)
+- **Info**: Graph Intelligence for AI Coding Agents (FalkorDB Connected Data)
 - **Links**: GitHub Repository, Documentation, FalkorDB Official Docs, MIT License.

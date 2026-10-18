@@ -1,4 +1,4 @@
-# Ripple — 2-3 Minute Demo Video Script & Hackathon Submission
+# Ripple — Demo Video Script & Project Overview
 
 ---
 
@@ -14,7 +14,7 @@
 ### [0:35 - 1:15] Scene 2: The Graph in FalkorDB (The Secret Weapon)
 - **Screen**: Switch to FalkorDB Browser at `http://localhost:3000`. Show the interactive force-directed graph with 128 nodes and 445 edges.
 - **Voiceover**:
-  > *"To solve this, we built **Ripple**, an MCP server powered by FalkorDB for Track 1 of Graph Hacks.*
+  > *"To solve this, we built **Ripple**, an MCP server powered by FalkorDB.*
   > *Ripple uses `ts-morph` AST analysis to parse repository imports, resolving complex barrel files and `@/` path aliases. It streams this directly into FalkorDB as a connected graph of `File` nodes and `IMPORTS` relationships.*
   > *FalkorDB's matrix-based graph engine allows our AI agents to perform sub-millisecond graph traversals and compute transitive blast radiuses on the fly."*
 
@@ -38,16 +38,13 @@
 
 ---
 
-## Part 2: Hackathon Submission Text
+## Part 2: Project Overview & Submission Text
 
 ### Project Title
 **Ripple: FalkorDB-Powered Dependency Graph & Blast Radius Intelligence for AI Coding Agents**
 
 ### Tagline
 Empowering AI coding agents with graph intelligence so they know what breaks before they edit code.
-
-### Track
-**Track 1: Agents that act on connected data, powered by FalkorDB**
 
 ### GitHub Repository
 https://github.com/trivikramkalagi91-commits/Ripple
