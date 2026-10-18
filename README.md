@@ -218,5 +218,13 @@ node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
 
 ## Project Info
 - **Live Website**: [https://ripple-graph.vercel.app](https://ripple-graph.vercel.app)
+- **Built by**: **Trivikram Kalagi** & **Suhas Hannamanavar**
 - **Built with**: FalkorDB, TypeScript, ts-morph, @modelcontextprotocol/sdk
 - **License**: MIT
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by <strong>Trivikram Kalagi</strong> and <strong>Suhas Hannamanavar</strong></p>
+</div>
+
