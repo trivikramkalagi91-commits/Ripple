@@ -36,6 +36,79 @@ AI coding agents query Ripple *before* making changes to know the real blast rad
 
 ---
 
+## Architecture Overview
+
+Ripple bridges static code analysis, low-latency graph databases, and LLM-powered coding agents via the Model Context Protocol (MCP):
+
+```mermaid
+flowchart TD
+    subgraph Repo["1. Target Codebase"]
+        SourceFiles["Source Files (.ts, .tsx, .js)"]
+        TSConfig["tsconfig.json & Path Aliases (@/*)"]
+        Barrels["Barrel Re-exports (index.ts)"]
+    end
+
+    subgraph Ingestion["2. Ripple AST Indexer (CLI)"]
+        TSMorph["ts-morph AST Parser"]
+        PathResolver["Static Import Resolver"]
+        GraphBuilder["Property Graph Builder"]
+        TSMorph --> PathResolver --> GraphBuilder
+    end
+
+    subgraph DB["3. FalkorDB Graph Engine"]
+        FalkorCore["FalkorDB (GraphBLAS Engine :6379)"]
+        Nodes["(:File {path, loc}) Nodes"]
+        Edges["(:File)-[:IMPORTS]->(:File) Edges"]
+        Index["Schema Index ON :File(path)"]
+        Algorithms["Native Graph Algorithms (PageRank, In-Degree)"]
+        FalkorCore --- Nodes
+        FalkorCore --- Edges
+        FalkorCore --- Index
+        FalkorCore --- Algorithms
+    end
+
+    subgraph Server["4. Ripple MCP Server (stdio)"]
+        MCPLayer["Model Context Protocol (JSON-RPC Layer)"]
+        Tool1["blast_radius(path, maxHops)"]
+        Tool2["why_affected(from, to)"]
+        Tool3["risk_hotspots(limit)"]
+        Tool4["safe_edit_order(path)"]
+        MCPLayer --> Tool1
+        MCPLayer --> Tool2
+        MCPLayer --> Tool3
+        MCPLayer --> Tool4
+    end
+
+    subgraph Agents["5. AI Coding Agents & IDEs"]
+        Cursor["Cursor"]
+        Claude["Claude Desktop"]
+        Copilot["GitHub Copilot"]
+        Antigravity["Antigravity IDE"]
+    end
+
+    SourceFiles --> TSMorph
+    TSConfig --> PathResolver
+    Barrels --> PathResolver
+
+    GraphBuilder -- "Ingest AST & Enforce Schema" --> FalkorCore
+
+    Tool1 -- "Cypher Multi-Hop Expansion (*1..N)" --> FalkorCore
+    Tool2 -- "Shortest Path Matrix Query" --> FalkorCore
+    Tool3 -- "Centrality & PageRank" --> FalkorCore
+    Tool4 -- "Topological BFS Ordering" --> FalkorCore
+
+    Agents -- "MCP Tool Calls (JSON-RPC)" --> MCPLayer
+    MCPLayer -- "Blast Radius & Topological Plan" --> Agents
+```
+
+### How the Pipeline Works:
+1. **AST Ingestion (`cli.ts`)**: Parses TypeScript/JavaScript abstract syntax trees with `ts-morph`, resolves `tsconfig` paths and barrel exports, and generates a clean property graph.
+2. **Graph Storage (`FalkorDB`)**: Stores files as `(:File)` nodes and imports as `(:File)-[:IMPORTS]->(:File)` directed edges with indexed paths for $O(1)$ lookups.
+3. **MCP Tool Execution (`server.ts`)**: Runs Cypher queries through FalkorDB's GraphBLAS matrix traversal engine, resolving multi-hop paths in 3–5ms.
+4. **Agent Action**: The coding agent queries Ripple before executing refactors, preventing regressions before modifying code.
+
+---
+
 ## The 4 MCP Tools
 
 | Tool | When AI Coding Agents Call It | What It Returns |
