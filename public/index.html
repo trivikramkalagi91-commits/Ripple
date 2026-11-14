@@ -1,750 +1,681 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="bg-[#faf9f6]" lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ripple - Dependency Graph Intelligence for AI Coding Agents</title>
-<link rel="icon" type="image/png" href="logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-    :root {
-      --bg: #FAFAF9;
-      --card: #FFFFFF;
-      --text: #18181B;
-      --muted: #71717A;
-      --ink-2: #27272A;
-      --accent: #18181B;
-      --accent-deep: #09090B;
-      --accent-soft: #F4F4F5;
-      --accent-2: #4F46E5;
-      --accent-2-soft: #EEF2FF;
-      --warm: #EA580C;
-      --warm-soft: #FFF7ED;
-      --violet: #7C3AED;
-      --violet-soft: #EDE9FE;
-      --border: rgba(24, 24, 27, 0.08);
-      --border-strong: rgba(24, 24, 27, 0.16);
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    .font-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 600; }
-    .font-mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
-    
-    .bg-grid {
-      background-image:
-        linear-gradient(rgba(24, 24, 27, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(24, 24, 27, 0.04) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
-    
-    .hero-gradient {
-      background: 
-        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(24, 24, 27, 0.06), transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 25%, rgba(79, 70, 229, 0.05), transparent 50%);
-    }
-    
-    .card-hover {
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    .card-hover:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
-    }
-    
-    .btn-primary {
-      background: var(--accent);
-      color: #FFFFFF;
-      border: 1px solid var(--accent);
-      transition: all 0.2s ease;
-    }
-    .btn-primary:hover {
-      background: var(--accent-deep);
-      border-color: var(--accent-deep);
-      box-shadow: 0 4px 16px rgba(13, 148, 136, 0.25);
-    }
-    
-    .btn-secondary {
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border-strong);
-      transition: all 0.2s ease;
-    }
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    
-    .tab-btn {
-      padding: 12px 20px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-      background: transparent;
-      border: none;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      transition: all 0.15s ease;
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Sarvam-Ripple — Graph Intelligence & Architectural Guardian for AI Coding Agents</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#faf9f6",
+            "surface-dim": "#dbdad7",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f4f3f1",
+            "surface-container": "#efeeeb",
+            "surface-container-high": "#e9e8e5",
+            "surface-container-highest": "#e3e2e0",
+            "on-surface": "#1a1c1a",
+            "on-surface-variant": "#444748",
+            "outline": "#747878",
+            "outline-variant": "#c4c7c7",
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "secondary": "#705a44",
+            "secondary-container": "#fcddc0",
+            "accent": "#6366f1",
+            "sarvam": "#f97316",
+            "falkor": "#ef4444"
+          },
+          fontFamily: {
+            "display": ["Newsreader", "serif"],
+            "sans": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #faf9f6;
+      color: #1a1c1a;
       font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    .tab-btn:hover { color: var(--text); background: rgba(15, 23, 42, 0.03); }
-    .tab-btn.active {
-      color: var(--accent);
-      background: var(--accent-soft);
+    .font-serif-display {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .nav-tab.active {
+      color: #1a1c1a;
       font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 8px;
+      text-decoration-color: #705a44;
+      text-decoration-thickness: 2px;
     }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    
-    .window-bar {
-      background: linear-gradient(180deg, #F8FAFC, #F1F5F9);
-      border-bottom: 1px solid var(--border);
+    .cube-float {
+      animation: float 4s ease-in-out infinite;
     }
-    
-    .code-block {
-      background: #0F172A;
-      color: #E2E8F0;
-      border-radius: 10px;
-      padding: 18px 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12.5px;
-      line-height: 1.65;
-      overflow-x: auto;
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
     }
-    .code-block .c-key { color: #67E8F9; }
-    .code-block .c-str { color: #86EFAC; }
-    .code-block .c-num { color: #FCD34D; }
-    .code-block .c-com { color: #64748B; }
-    
-    .node-chain {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .node-chip {
-      background: var(--card);
-      border: 1px solid var(--border-strong);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--text);
-    }
-    .arrow-glyph { color: var(--muted); font-size: 14px; font-weight: 600; }
-    
-    .rank-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .rank-row:last-child { border-bottom: none; }
-    
-    .step-item {
-      display: flex;
-      gap: 14px;
-      padding: 10px 0;
-      align-items: flex-start;
-    }
-    .step-num {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: var(--accent-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-deep);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    
-    a { color: inherit; text-decoration: none; }
-    .nav-link {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink-2);
-      transition: color 0.2s ease;
-      position: relative;
-    }
-    .nav-link:hover { color: var(--accent); }
-    
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
-    }
-    
-    .feature-card {
-      border-radius: 14px;
-      padding: 28px;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .icon-tile {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    
-    ::selection { background: rgba(13, 148, 136, 0.18); }
-</style>
+  </style>
 </head>
-<body>
-<div style="background:var(--bg);min-height:100%;">
+<body class="bg-surface text-on-surface antialiased selection:bg-[#fcddc0] selection:text-[#281807]">
 
-  <!-- Navigation Bar -->
-  <header style="position:sticky;top:0;z-index:50;background:rgba(250,250,249,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);">
-    <div style="width:100%;padding:0 36px;display:flex;align-items:center;justify-content:space-between;height:68px;">
-      <!-- Extreme Left: Logo and Brand -->
-      <a href="#" style="display:flex;align-items:center;gap:12px;">
-        <img src="logo.png" alt="Ripple Logo" style="width:36px;height:30px;object-fit:contain;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.15));">
-        <span class="font-display" style="font-size:22px;letter-spacing:-0.02em;">Ripple</span>
+  <!-- Fixed Editorial Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+    <div class="h-16 max-w-6xl mx-auto px-6 flex items-center justify-between">
+      
+      <!-- Logo + Brand -->
+      <a href="#" onclick="switchTab('home')" class="flex items-center gap-3 group focus:outline-none">
+        <img src="logo.png" alt="Sarvam-Ripple Cube" class="w-11 h-11 object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+        <div class="flex items-center gap-2">
+          <span class="font-serif-display text-xl font-medium tracking-tight text-on-surface">SARVAM-RIPPLE</span>
+          <span class="font-mono text-[10px] px-1.5 py-0.5 bg-surface-container-high text-on-surface-variant font-semibold rounded uppercase tracking-wider">v1.0</span>
+        </div>
       </a>
 
-      <!-- Center Links -->
-      <nav style="display:flex;align-items:center;gap:36px;">
-        <a href="#problem" class="nav-link">Problem</a>
-        <a href="#architecture" class="nav-link">How It Works</a>
-        <a href="#tools" class="nav-link">MCP Tools</a>
-        <a href="#graph" class="nav-link">FalkorDB Graph</a>
-        <a href="#quickstart" class="nav-link">Quickstart</a>
+      <!-- Navigation Tabs -->
+      <nav class="hidden md:flex items-center gap-8">
+        <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab active text-sm text-on-surface-variant hover:text-on-surface transition-colors py-1">Home</button>
+        <button onclick="switchTab('architecture')" id="tab-btn-architecture" class="nav-tab text-sm text-on-surface-variant hover:text-on-surface transition-colors py-1">Architecture</button>
+        <button onclick="switchTab('mcp-tools')" id="tab-btn-mcp-tools" class="nav-tab text-sm text-on-surface-variant hover:text-on-surface transition-colors py-1">MCP Tools</button>
+        <button onclick="switchTab('quickstart')" id="tab-btn-quickstart" class="nav-tab text-sm text-on-surface-variant hover:text-on-surface transition-colors py-1">Quickstart</button>
+        <a href="https://github.com/shriharidesai209-commits/Sarvam-Ripple" target="_blank" rel="noopener noreferrer" class="text-sm text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1">
+          GitHub
+          <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+        </a>
       </nav>
 
-      <!-- Extreme Right: GitHub CTA -->
-      <a href="https://github.com/trivikramkalagi91-commits/Ripple" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border-radius:100px;background:var(--text);color:#FFFFFF;font-size:13.5px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s ease;">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-        GitHub
-      </a>
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/shriharidesai209-commits/Sarvam-Ripple" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center justify-center p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container rounded-lg transition-colors" title="View Source on GitHub">
+          <span class="material-symbols-outlined text-[20px]">code</span>
+        </a>
+        <button onclick="switchTab('quickstart')" class="inline-flex items-center justify-center px-4 py-2 bg-primary text-on-primary text-sm font-medium hover:bg-secondary transition-colors rounded shadow-sm focus:outline-none">
+          Get Started
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-gradient" style="padding:88px 24px 72px;position:relative;overflow:hidden;">
-    <div class="bg-grid" style="position:absolute;inset:0;opacity:0.4;pointer-events:none;"></div>
-    <div style="max-width:1040px;margin:0 auto;position:relative;">
+  <!-- Main Container -->
+  <main class="w-full pt-16 min-h-screen">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: HOME                                -->
+    <!-- ========================================== -->
+    <div id="tab-home" class="tab-content active">
       
-      <div style="text-align:center;margin-bottom:52px;">
-        <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--card);border:1px solid var(--border-strong);box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:28px;">
-          <img src="logo.png" style="width:16px;height:13px;object-fit:contain;">
-          <span style="font-size:12.5px;font-weight:600;color:var(--text);">FalkorDB Powered &bull; Graph Intelligence for Coding Agents</span>
-        </div>
-        <h1 class="font-display" style="font-size:clamp(38px,5.2vw,60px);line-height:1.1;margin:0 0 22px;letter-spacing:-0.015em;">
-          Never let your AI coding agent<br>edit code in the dark.
-        </h1>
-        <p style="font-size:18px;line-height:1.7;color:var(--ink-2);max-width:660px;margin:0 auto;">
-          AI agents edit one file and silently break consumers 4 hops away. <strong>Ripple</strong> gives them real-time dependency graph intelligence powered by <strong>FalkorDB</strong> over MCP, before a single line is modified.
-        </p>
-        <div style="display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap;">
-          <a href="#quickstart" class="btn-primary" style="padding:13px 28px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">
-            Install Ripple
-          </a>
-          <a href="https://github.com/trivikramkalagi91-commits/Ripple" target="_blank" rel="noopener" class="btn-secondary" style="padding:13px 28px;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;">
-            View GitHub
-          </a>
-        </div>
-      </div>
+      <!-- Hero Section -->
+      <section class="max-w-6xl mx-auto px-6 pt-16 pb-20 md:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-outline-variant/40 rounded-full text-xs font-mono text-secondary">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              FalkorDB GraphBLAS + Sarvam AI Reasoning
+            </div>
+            
+            <h1 class="font-serif-display text-4xl sm:text-5xl md:text-6xl text-on-surface tracking-tight leading-[1.1]">
+              Never let your AI coding agent edit code in the dark.
+            </h1>
+            
+            <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              When AI agents alter a shared utility or interface, consumers 4 hops away silently break. <strong>Sarvam-Ripple</strong> pairs FalkorDB's sub-5ms graph traversals with Sarvam AI's architectural safe planner over MCP.
+            </p>
 
-      <!-- Product Showcase Window -->
-      <div style="border-radius:14px;overflow:hidden;border:1px solid var(--border-strong);box-shadow:0 24px 70px rgba(15,23,42,0.12);background:var(--card);">
-        <!-- Window Title Bar -->
-        <div class="window-bar" style="display:flex;align-items:center;gap:10px;padding:12px 18px;">
-          <span style="width:12px;height:12px;border-radius:50%;background:#FF5F57;display:inline-block;"></span>
-          <span style="width:12px;height:12px;border-radius:50%;background:#FEBC2E;display:inline-block;"></span>
-          <span style="width:12px;height:12px;border-radius:50%;background:#28C840;display:inline-block;"></span>
-          <div style="flex:1;text-align:center;">
-            <span style="font-size:12.5px;color:var(--muted);font-weight:500;font-family:'JetBrains Mono',monospace;">Antigravity IDE / Cursor — blast_radius comparison</span>
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <button onclick="switchTab('quickstart')" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-on-primary text-sm font-medium hover:bg-secondary transition-colors rounded shadow-sm">
+                Install Sarvam-Ripple
+                <span class="material-symbols-outlined text-[16px] ml-2">arrow_forward</span>
+              </button>
+              <a href="https://github.com/shriharidesai209-commits/Sarvam-Ripple" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 bg-surface-container-lowest border border-outline-variant/60 text-on-surface text-sm font-medium hover:bg-surface-container-high transition-colors rounded shadow-sm">
+                <span class="material-symbols-outlined text-[18px] mr-2 text-secondary">code</span>
+                Explore GitHub
+              </a>
+            </div>
           </div>
-        </div>
-        <!-- Split Panels -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;min-height:310px;">
-          <!-- Left: Without Ripple -->
-          <div style="padding:26px;border-right:1px solid var(--border);">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#DC2626;"></span>
-              <span style="font-size:13px;font-weight:600;color:#B91C1C;text-transform:uppercase;letter-spacing:0.04em;">Without Ripple</span>
-            </div>
-            <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px;font-weight:500;">User prompt</div>
-            <div class="font-mono" style="font-size:12.5px;background:#F1F5F9;padding:10px 12px;border-radius:6px;margin-bottom:16px;color:var(--text);border:1px solid var(--border);">
-              Refactor BaseEntity in src/types/api.ts
-            </div>
-            <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px;font-weight:500;">Agent action</div>
-            <div style="font-size:13.5px;color:var(--ink-2);margin-bottom:18px;">Grep search completed. 3 files edited.</div>
-            <div style="padding:14px 16px;border-radius:10px;background:#FEF2F2;border:1px solid #FECACA;">
-              <div style="display:flex;align-items:center;gap:8px;font-weight:600;color:#B91C1C;font-size:13.5px;margin-bottom:6px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                Build Failed
+
+          <!-- Logo Mascot Showcase -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative bg-surface-container-lowest border border-outline-variant/50 p-8 sm:p-10 rounded-2xl shadow-sm text-center max-w-md w-full">
+              <div class="w-52 h-52 sm:w-64 sm:h-64 mx-auto mb-5 cube-float flex items-center justify-center">
+                <img src="logo.png" alt="Sarvam-Ripple 3D Cube Logo" class="w-full h-full object-contain filter drop-shadow-lg">
               </div>
-              <div style="font-size:12.5px;color:#991B1B;line-height:1.5;">
-                TypeScript reports 58 broken consumers across 4 dependency hops.
+              <h3 class="font-serif-display text-2xl font-medium text-on-surface">Multidimensional Safety</h3>
+              <p class="text-xs sm:text-sm text-on-surface-variant mt-2 font-mono leading-relaxed">Like a Rubik's cube, every code change affects interconnected layers. Sarvam-Ripple solves the whole puzzle.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 1-Click Agent Setup Prompt (Autonomous AI Installer) -->
+      <section class="max-w-6xl mx-auto px-6 pb-16">
+        <div class="bg-surface-container-lowest border-2 border-secondary/40 p-8 rounded-xl shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-widest text-secondary font-semibold">⚡ ZERO MANUAL SETUP</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface mt-0.5">1-Click Agent Setup Prompt</h2>
+            </div>
+            <button id="copyPromptBtn" onclick="copyAgentPrompt()" class="inline-flex items-center gap-2 px-4 py-2 bg-secondary text-white font-medium text-xs uppercase tracking-wider rounded hover:bg-black transition-colors self-start sm:self-auto">
+              <span class="material-symbols-outlined text-[16px]">content_copy</span>
+              Copy Setup Prompt
+            </button>
+          </div>
+          <p class="text-sm text-on-surface-variant mb-4 leading-relaxed">
+            Paste this prompt directly into your AI coding assistant (Cursor, Claude Desktop, or Antigravity). The agent will autonomously spin up FalkorDB, install Sarvam-Ripple, index your project, and enforce graph-safety automatically:
+          </p>
+          <div class="relative bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs text-on-surface leading-relaxed overflow-x-auto">
+            <pre id="agentPromptText" class="whitespace-pre-wrap">Please install and set up Sarvam-Ripple for this workspace by performing the following steps:
+
+1. Check FalkorDB availability:
+   - Check if FalkorDB is reachable on localhost:6379.
+   - If not reachable, check if Docker is installed and running (`docker ps`).
+   - If Docker is running, start FalkorDB:
+     docker run -d --name falkordb --restart unless-stopped -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest
+   - If Docker or FalkorDB is NOT installed on this machine, inform the user:
+     "Neither Docker nor FalkorDB was detected locally. You have two instant options:
+      Option A (Zero-install Cloud - Recommended): Create a free database in 30 seconds at https://app.falkordb.cloud (no Docker required). Share your Host, Port, and Password, and I will configure .env automatically!
+      Option B (Local): Install Docker Desktop (https://www.docker.com) or install FalkorDB natively (`brew install falkordb/tap/falkordb` or `curl -fsSL https://www.falkordb.com/install.sh | bash`)."
+
+2. Clone and build Sarvam-Ripple into a local helper folder:
+   git clone https://github.com/shriharidesai209-commits/Sarvam-Ripple.git .sarvam-ripple
+   cd .sarvam-ripple && npm install && npm run build && cd ..
+
+3. Configure environment:
+   In `.sarvam-ripple/.env`, set:
+   SARVAM_API_KEY=&lt;your_sarvam_api_key&gt;
+   FALKOR_HOST=localhost (or your FalkorDB Cloud host)
+   FALKOR_PORT=6379 (or your FalkorDB Cloud port)
+
+4. Index this repository into FalkorDB:
+   node .sarvam-ripple/dist/cli.js index .
+
+5. Add the following rule to your instructions:
+   "Before modifying, renaming, or refactoring any exported function, type, or component, you MUST consult Sarvam-Ripple's generate_safe_plan tool (or run `node .sarvam-ripple/dist/cli.js plan &lt;file&gt; -c '&lt;change&gt;'`) to inspect the multi-hop blast radius and apply all edits in topological safe order so nothing breaks."
+
+Confirm when setup and indexing are complete!</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architectural Dependency Graph Preview -->
+      <section class="max-w-6xl mx-auto px-6 pb-24">
+        <div class="bg-surface-container-lowest border border-outline-variant/40 shadow-sm overflow-hidden rounded-xl">
+          <div class="px-6 py-3 bg-surface-container-low border-b border-outline-variant/30 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary text-[18px]">hub</span>
+              <span class="font-mono text-xs uppercase tracking-wider text-on-surface font-semibold">Architectural Dependency Graph</span>
+            </div>
+            <span class="font-mono text-xs text-secondary bg-surface-container-lowest px-2 py-0.5 border border-outline-variant/30 rounded">
+              target: src/types/api.ts#UserProfile · FalkorDB traversal (4ms)
+            </span>
+          </div>
+
+          <div class="p-8 bg-surface/30">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+              
+              <!-- Source Target Node -->
+              <div class="bg-surface-container-lowest border-2 border-secondary p-5 shadow-sm rounded relative">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-mono text-[10px] uppercase text-secondary tracking-widest font-semibold">Root Target Node</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                </div>
+                <p class="font-mono text-base text-on-surface font-semibold">src/types/api.ts</p>
+                <p class="text-xs text-on-surface-variant mt-1 font-mono">export interface UserProfile</p>
+              </div>
+
+              <!-- Mid-Layer Consumers (Hop 1 & 2) -->
+              <div class="space-y-4">
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-4 shadow-sm rounded">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[10px] uppercase text-orange-600 font-semibold tracking-wider">Hop 1 · Direct Consumer</span>
+                    <span class="w-2 h-2 rounded-full bg-orange-500"></span>
+                  </div>
+                  <p class="font-mono text-xs font-semibold text-on-surface">src/services/auth.ts</p>
+                  <p class="text-[11px] text-on-surface-variant mt-0.5">authenticateSession()</p>
+                </div>
+                
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-4 shadow-sm rounded">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[10px] uppercase text-amber-600 font-semibold tracking-wider">Hop 2 · UI Consumer</span>
+                    <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                  </div>
+                  <p class="font-mono text-xs font-semibold text-on-surface">components/UserProfileCard.tsx</p>
+                  <p class="text-[11px] text-on-surface-variant mt-0.5">&lt;UserProfileCard user={...} /&gt;</p>
+                </div>
+              </div>
+
+              <!-- Outermost Consumers (Hop 3 & 4) -->
+              <div class="space-y-4">
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-4 shadow-sm rounded">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[10px] uppercase text-blue-600 font-semibold tracking-wider">Hop 3 · Page View</span>
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                  </div>
+                  <p class="font-mono text-xs font-semibold text-on-surface">src/pages/Dashboard.tsx</p>
+                  <p class="text-[11px] text-on-surface-variant mt-0.5">&lt;DashboardPage /&gt;</p>
+                </div>
+
+                <div class="bg-surface-container-lowest border border-outline-variant/60 p-4 shadow-sm rounded">
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="font-mono text-[10px] uppercase text-emerald-600 font-semibold tracking-wider">Hop 4 · App Shell</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  </div>
+                  <p class="font-mono text-xs font-semibold text-on-surface">src/App.tsx</p>
+                  <p class="text-[11px] text-on-surface-variant mt-0.5">Root Application Container</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Status Strip -->
+            <div class="pt-6 mt-6 border-t border-outline-variant/30 flex flex-wrap items-center justify-between gap-4 font-mono text-xs text-on-surface-variant">
+              <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5 text-on-surface font-medium">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Topological Sequencing Ready
+                </span>
+                <span>•</span>
+                <span>Sub-5ms GraphBLAS Query</span>
+              </div>
+              <span class="text-secondary font-semibold">Sarvam AI Zero-Regression Execution Guaranteed</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: ARCHITECTURE                        -->
+    <!-- ========================================== -->
+    <div id="tab-architecture" class="tab-content">
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="space-y-4 max-w-3xl mb-12">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs uppercase tracking-widest text-secondary font-semibold">SYSTEM ARCHITECTURE / PIPELINE SPEC</span>
+            <span class="w-8 h-[1px] bg-outline-variant"></span>
+            <span class="font-mono text-xs text-on-surface-variant">REV 2.0</span>
+          </div>
+          <h1 class="font-serif-display text-4xl sm:text-5xl text-on-surface tracking-tight">
+            From code change to architectural understanding.
+          </h1>
+          <p class="text-lg text-on-surface-variant leading-relaxed">
+            How Sarvam-Ripple combines compiler AST analysis, FalkorDB GraphBLAS sparse matrices, and Sarvam AI reasoning to guarantee zero-regression code refactorings.
+          </p>
+        </div>
+
+        <!-- 5-Stage Pipeline Flow Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 my-12">
+          
+          <div class="bg-surface-container-lowest p-6 border border-outline-variant/40 rounded-lg flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-secondary font-semibold">01 / REPOSITORY</span>
+              <h4 class="font-serif-display text-lg font-medium text-on-surface mt-2 mb-1">Target Code</h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">Source files, tsconfig path aliases (@/*), and barrel re-exports.</p>
+            </div>
+            <div class="mt-6 pt-2 border-t border-outline-variant/20 font-mono text-[11px] text-on-surface-variant">Raw Filesystem</div>
+          </div>
+
+          <div class="bg-surface-container-lowest p-6 border border-outline-variant/40 rounded-lg flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-secondary font-semibold">02 / PARSER</span>
+              <h4 class="font-serif-display text-lg font-medium text-on-surface mt-2 mb-1">ts-morph AST</h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">Extracts concrete AST trees, export tables, and static import edges.</p>
+            </div>
+            <div class="mt-6 pt-2 border-t border-outline-variant/20 font-mono text-[11px] text-on-surface-variant">Compiler Visitors</div>
+          </div>
+
+          <div class="bg-primary text-white p-6 rounded-lg flex flex-col justify-between shadow-md">
+            <div>
+              <span class="font-mono text-xs text-[#fcddc0] font-semibold">03 / GRAPH ENGINE</span>
+              <h4 class="font-serif-display text-lg font-medium mt-2 mb-1">FalkorDB</h4>
+              <p class="text-xs text-gray-300 leading-relaxed">Sparse-matrix GraphBLAS traversal calculating multi-hop blast radiuses in 4ms.</p>
+            </div>
+            <div class="mt-6 pt-2 border-t border-gray-700 font-mono text-[11px] text-gray-400">Sub-5ms Cypher</div>
+          </div>
+
+          <div class="bg-surface-container-lowest p-6 border border-outline-variant/40 rounded-lg flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-secondary font-semibold">04 / REASONING</span>
+              <h4 class="font-serif-display text-lg font-medium text-on-surface mt-2 mb-1">Sarvam AI</h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">Sarvam-105B models analyze affected files and output topological patch plans.</p>
+            </div>
+            <div class="mt-6 pt-2 border-t border-outline-variant/20 font-mono text-[11px] text-on-surface-variant">Architectural LLM</div>
+          </div>
+
+          <div class="bg-surface-container-lowest p-6 border border-outline-variant/40 rounded-lg flex flex-col justify-between">
+            <div>
+              <span class="font-mono text-xs text-secondary font-semibold">05 / AGENT MCP</span>
+              <h4 class="font-serif-display text-lg font-medium text-on-surface mt-2 mb-1">AI Coding Agent</h4>
+              <p class="text-xs text-on-surface-variant leading-relaxed">Cursor, Claude, or Antigravity executes edits file-by-file without regressions.</p>
+            </div>
+            <div class="mt-6 pt-2 border-t border-outline-variant/20 font-mono text-[11px] text-on-surface-variant">Zero Regressions</div>
+          </div>
+
+        </div>
+
+        <!-- Deep Dive Comparison -->
+        <div class="bg-surface-container-lowest border border-outline-variant/40 p-8 rounded-xl mt-8">
+          <h3 class="font-serif-display text-2xl font-normal text-on-surface mb-4">Why Flat Text Search and Linters Fail</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-on-surface-variant leading-relaxed">
+            <div>
+              <h4 class="font-semibold text-on-surface mb-2 font-mono">Traditional Grep & Vector RAG</h4>
+              <p>Standard search is syntactically blind to barrel files (<code>export * from './...'</code>) and tsconfig path aliases. A generic identifier like <code>id</code> generates thousands of false positives, while indirect dependencies 2 to 4 hops away are completely missed.</p>
+            </div>
+            <div>
+              <h4 class="font-semibold text-secondary mb-2 font-mono">Sarvam-Ripple Deterministic Graph</h4>
+              <p>FalkorDB stores the true, resolved property graph. Paths are traversed using matrix multiplications, discovering transitive dependencies with mathematical certainty and sorting them into a clean topological execution order.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: MCP TOOLS                           -->
+    <!-- ========================================== -->
+    <div id="tab-mcp-tools" class="tab-content">
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="space-y-4 max-w-3xl mb-12">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs uppercase tracking-widest text-secondary font-semibold">PROTOCOL SPECIFICATION</span>
+            <span class="w-8 h-[1px] bg-outline-variant"></span>
+            <span class="font-mono text-xs text-on-surface-variant">5 NATIVE PRIMITIVES</span>
+          </div>
+          <h1 class="font-serif-display text-4xl sm:text-5xl text-on-surface tracking-tight">
+            The MCP Tool Suite
+          </h1>
+          <p class="text-lg text-on-surface-variant leading-relaxed">
+            Sarvam-Ripple exposes 5 high-leverage tools over the standard Model Context Protocol. AI coding assistants call these before generating code modifications.
+          </p>
+        </div>
+
+        <div class="space-y-8 divide-y divide-outline-variant/30">
+          
+          <!-- Tool 1: generate_safe_plan -->
+          <div class="pt-8 first:pt-0 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-6 space-y-3">
+              <span class="font-mono text-xs text-secondary font-semibold uppercase">01 / FLAGSHIP REFACTORING</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface">generate_safe_plan</h2>
+              <p class="text-sm text-on-surface-variant leading-relaxed">
+                Combines FalkorDB graph traversal with Sarvam AI reasoning to generate a complete visual blast radius diagram and an exact step-by-step code modification plan in safe topological order.
+              </p>
+              <div class="pt-2 font-mono text-xs text-on-surface-variant">
+                <strong>Inputs:</strong> <code>path: string</code>, <code>proposedChange: string</code>
               </div>
             </div>
+            <div class="lg:col-span-6 bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs overflow-x-auto">
+              <span class="text-secondary font-semibold block mb-2">// generate_safe_plan response snippet</span>
+              <pre class="text-on-surface"><code>{
+  "totalAffected": 4,
+  "safePlan": [
+    { "step": 1, "file": "src/types/api.ts", "action": "Update UserProfile" },
+    { "step": 2, "file": "src/services/auth.ts", "action": "Update call sites" },
+    { "step": 3, "file": "src/components/UserProfileCard.tsx", "action": "Update props" }
+  ],
+  "compile_guarantee": true
+}</code></pre>
+            </div>
           </div>
-          <!-- Right: With Ripple -->
-          <div style="padding:26px;background:linear-gradient(180deg, rgba(79,70,229,0.03), transparent 50%);">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:18px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:var(--accent-2);"></span>
-              <span style="font-size:13px;font-weight:600;color:var(--accent-2);text-transform:uppercase;letter-spacing:0.04em;">With Ripple + FalkorDB</span>
-            </div>
-            <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px;font-weight:500;">User prompt</div>
-            <div class="font-mono" style="font-size:12.5px;background:#F1F5F9;padding:10px 12px;border-radius:6px;margin-bottom:16px;color:var(--text);border:1px solid var(--border);">
-              Refactor BaseEntity in src/types/api.ts
-            </div>
-            <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px;font-weight:500;">Agent action</div>
-            <div class="font-mono" style="font-size:12px;background:#EEF2FF;padding:10px 12px;border-radius:6px;margin-bottom:18px;color:var(--accent-2);border:1px solid rgba(79,70,229,0.2);">
-              blast_radius('api.ts') via FalkorDB MCP in 4ms
-            </div>
-            <div style="padding:14px 16px;border-radius:10px;background:#EEF2FF;border:1px solid #C7D2FE;">
-              <div style="display:flex;align-items:center;gap:8px;font-weight:600;color:var(--accent-2);font-size:13.5px;margin-bottom:6px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-                0 Errors. Zero Regressions.
+
+          <!-- Tool 2: blast_radius -->
+          <div class="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-6 space-y-3">
+              <span class="font-mono text-xs text-secondary font-semibold uppercase">02 / AUDITING</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface">blast_radius</h2>
+              <p class="text-sm text-on-surface-variant leading-relaxed">
+                Calculates all files that transitively import the target file up to N hops away. Returns structured dependency counts and an in-chat visual Mermaid diagram.
+              </p>
+              <div class="pt-2 font-mono text-xs text-on-surface-variant">
+                <strong>Inputs:</strong> <code>path: string</code>, <code>maxHops?: number (default 4)</code>
               </div>
-              <div style="font-size:12.5px;color:#3730A3;line-height:1.5;">
-                58 files detected across 4 hops. Edits applied in safe topological order.
+            </div>
+            <div class="lg:col-span-6 bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs overflow-x-auto">
+              <span class="text-secondary font-semibold block mb-2">// blast_radius response snippet</span>
+              <pre class="text-on-surface"><code>{
+  "target": "src/types/api.ts",
+  "totalDependents": 4,
+  "byDistance": {
+    "1": ["src/services/auth.ts"],
+    "2": ["src/components/UserProfileCard.tsx"],
+    "3": ["src/pages/Dashboard.tsx"],
+    "4": ["src/App.tsx"]
+  }
+}</code></pre>
+            </div>
+          </div>
+
+          <!-- Tool 3: why_affected -->
+          <div class="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-6 space-y-3">
+              <span class="font-mono text-xs text-secondary font-semibold uppercase">03 / PROVENANCE</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface">why_affected</h2>
+              <p class="text-sm text-on-surface-variant leading-relaxed">
+                Finds the shortest import chain between two distant files, explaining why modifying file "to" will break file "from".
+              </p>
+              <div class="pt-2 font-mono text-xs text-on-surface-variant">
+                <strong>Inputs:</strong> <code>from: string</code>, <code>to: string</code>
               </div>
             </div>
+            <div class="lg:col-span-6 bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs overflow-x-auto">
+              <span class="text-secondary font-semibold block mb-2">// why_affected response snippet</span>
+              <pre class="text-on-surface"><code>{
+  "from": "src/App.tsx",
+  "to": "src/types/api.ts",
+  "affected": true,
+  "hops": 4,
+  "chain": ["src/App.tsx", "src/pages/Dashboard.tsx", "src/components/UserProfileCard.tsx", "src/services/auth.ts", "src/types/api.ts"]
+}</code></pre>
+            </div>
           </div>
+
+          <!-- Tool 4: risk_hotspots -->
+          <div class="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-6 space-y-3">
+              <span class="font-mono text-xs text-secondary font-semibold uppercase">04 / ARCHITECTURAL HEALTH</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface">risk_hotspots</h2>
+              <p class="text-sm text-on-surface-variant leading-relaxed">
+                Identifies architectural single points of failure in the repository using in-degree centrality, highlighting files with the most incoming dependents.
+              </p>
+              <div class="pt-2 font-mono text-xs text-on-surface-variant">
+                <strong>Inputs:</strong> <code>limit?: number (default 10)</code>
+              </div>
+            </div>
+            <div class="lg:col-span-6 bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs overflow-x-auto">
+              <span class="text-secondary font-semibold block mb-2">// risk_hotspots response snippet</span>
+              <pre class="text-on-surface"><code>[
+  { "path": "src/types/api.ts", "inDegree": 4 },
+  { "path": "src/services/auth.ts", "inDegree": 3 }
+]</code></pre>
+            </div>
+          </div>
+
+          <!-- Tool 5: safe_edit_order -->
+          <div class="pt-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div class="lg:col-span-6 space-y-3">
+              <span class="font-mono text-xs text-secondary font-semibold uppercase">05 / SCHEDULING</span>
+              <h2 class="font-serif-display text-2xl font-normal text-on-surface">safe_edit_order</h2>
+              <p class="text-sm text-on-surface-variant leading-relaxed">
+                Sorts affected files into an acyclic topological sequence by distance from target (0 to N) so changes can be applied without deadlocks or broken builds.
+              </p>
+              <div class="pt-2 font-mono text-xs text-on-surface-variant">
+                <strong>Inputs:</strong> <code>path: string</code>
+              </div>
+            </div>
+            <div class="lg:col-span-6 bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs overflow-x-auto">
+              <span class="text-secondary font-semibold block mb-2">// safe_edit_order response snippet</span>
+              <pre class="text-on-surface"><code>[
+  { "step": 1, "distanceFromTarget": 0, "path": "src/types/api.ts" },
+  { "step": 2, "distanceFromTarget": 1, "path": "src/services/auth.ts" },
+  { "step": 3, "distanceFromTarget": 2, "path": "src/components/UserProfileCard.tsx" }
+]</code></pre>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <div class="section-divider" style="max-width:1120px;margin:0 auto;"></div>
+    <!-- ========================================== -->
+    <!-- TAB 4: QUICKSTART                          -->
+    <!-- ========================================== -->
+    <div id="tab-quickstart" class="tab-content">
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="space-y-4 max-w-3xl mb-12">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs uppercase tracking-widest text-secondary font-semibold">GET STARTED IN 3 MINUTES</span>
+            <span class="w-8 h-[1px] bg-outline-variant"></span>
+            <span class="font-mono text-xs text-on-surface-variant">SETUP GUIDE</span>
+          </div>
+          <h1 class="font-serif-display text-4xl sm:text-5xl text-on-surface tracking-tight">
+            Install and run Sarvam-Ripple.
+          </h1>
+          <p class="text-lg text-on-surface-variant leading-relaxed">
+            Follow these simple steps to set up FalkorDB, build Sarvam-Ripple, and connect it to your AI coding agent.
+          </p>
+        </div>
 
-  <!-- Capability Grid -->
-  <section id="problem" style="padding:72px 24px;">
-    <div style="max-width:1040px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:48px;">
-        <div class="eyebrow" style="margin-bottom:12px;">Technical Pillars</div>
-        <h2 class="font-display" style="font-size:clamp(28px,3.5vw,38px);margin:0;line-height:1.2;">
-          Four foundations of graph-aware editing
-        </h2>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
-        <div class="card-hover" style="padding:26px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div class="icon-tile" style="background:var(--accent-soft);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <!-- 3 Step Setup Grid -->
+        <div class="space-y-8">
+          
+          <!-- Step 1 -->
+          <div class="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-6 h-6 rounded-full bg-secondary text-white font-mono text-xs flex items-center justify-center font-semibold">1</span>
+              <h3 class="font-serif-display text-xl font-medium text-on-surface">Start FalkorDB</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-3">Run FalkorDB locally in Docker with the interactive visual studio enabled:</p>
+            <div class="bg-surface-container-low border border-outline-variant/40 p-3 rounded font-mono text-xs text-on-surface flex justify-between items-center">
+              <code>docker run -d --name falkordb -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest</code>
+              <button onclick="navigator.clipboard.writeText('docker run -d --name falkordb -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest'); alert('Copied!');" class="text-secondary font-mono text-xs hover:text-black">COPY</button>
+            </div>
           </div>
-          <div style="font-weight:600;font-size:15.5px;margin-bottom:8px;color:var(--text);">Sub-Millisecond Graph Traversal</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Matrix-based Cypher queries in FalkorDB traverse 4+ hops in under 10ms.</p>
-        </div>
-        <div class="card-hover" style="padding:26px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div class="icon-tile" style="background:var(--accent-2-soft);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+
+          <!-- Step 2 -->
+          <div class="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-6 h-6 rounded-full bg-secondary text-white font-mono text-xs flex items-center justify-center font-semibold">2</span>
+              <h3 class="font-serif-display text-xl font-medium text-on-surface">Clone & Build Sarvam-Ripple</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-3">Clone the repository and compile the TypeScript project:</p>
+            <div class="bg-surface-container-low border border-outline-variant/40 p-3 rounded font-mono text-xs text-on-surface space-y-1">
+              <div>git clone https://github.com/shriharidesai209-commits/Sarvam-Ripple.git</div>
+              <div>cd Sarvam-Ripple && npm install && npm run build</div>
+            </div>
           </div>
-          <div style="font-weight:600;font-size:15.5px;margin-bottom:8px;color:var(--text);">AST Deep Resolution</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Automatically resolves barrel re-exports and tsconfig path aliases.</p>
-        </div>
-        <div class="card-hover" style="padding:26px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div class="icon-tile" style="background:var(--warm-soft);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+
+          <!-- Step 3 -->
+          <div class="bg-surface-container-lowest border border-outline-variant/40 p-6 rounded-xl shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-6 h-6 rounded-full bg-secondary text-white font-mono text-xs flex items-center justify-center font-semibold">3</span>
+              <h3 class="font-serif-display text-xl font-medium text-on-surface">Index Your Project</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-3">Point the indexer to your TypeScript/JavaScript codebase:</p>
+            <div class="bg-surface-container-low border border-outline-variant/40 p-3 rounded font-mono text-xs text-on-surface">
+              <code>node dist/cli.js index /path/to/your/project</code>
+            </div>
           </div>
-          <div style="font-weight:600;font-size:15.5px;margin-bottom:8px;color:var(--text);">Native MCP Protocol</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Direct stdio integration with Antigravity IDE, Cursor, Claude Code, and VS Code.</p>
-        </div>
-        <div class="card-hover" style="padding:26px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div class="icon-tile" style="background:var(--violet-soft);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+
+          <!-- Step 4: MCP Config -->
+          <div class="bg-surface-container-lowest border-2 border-secondary/40 p-6 rounded-xl shadow-sm">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="w-6 h-6 rounded-full bg-black text-white font-mono text-xs flex items-center justify-center font-semibold">4</span>
+              <h3 class="font-serif-display text-xl font-medium text-on-surface">Connect to Cursor / Claude Desktop</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant mb-3">Add Sarvam-Ripple to your MCP configuration (<code>claude_desktop_config.json</code> or Cursor MCP settings):</p>
+            <div class="bg-surface-container-low border border-outline-variant/40 p-4 rounded font-mono text-xs text-on-surface overflow-x-auto">
+              <pre><code>{
+  "mcpServers": {
+    "sarvam-ripple": {
+      "command": "node",
+      "args": ["/absolute/path/to/Sarvam-Ripple/dist/server.js"],
+      "env": {
+        "SARVAM_API_KEY": "your_sarvam_api_key",
+        "SARVAM_MOCK": "false"
+      }
+    }
+  }
+}</code></pre>
+            </div>
           </div>
-          <div style="font-weight:600;font-size:15.5px;margin-bottom:8px;color:var(--text);">Topological Safety</div>
-          <p style="font-size:14px;color:var(--muted);line-height:1.6;margin:0;">Automatically calculates safe edit sequences to prevent broken intermediate states.</p>
+
         </div>
-      </div>
+      </section>
     </div>
-  </section>
 
-  <!-- Feature Showcase -->
-  <section id="tools" style="padding:72px 24px;background:#FFFFFF;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-    <div style="max-width:1040px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:48px;">
-        <div class="eyebrow" style="margin-bottom:12px;">MCP Tools</div>
-        <h2 class="font-display" style="font-size:clamp(28px,3.5vw,38px);margin:0;line-height:1.2;">
-          Four queries that change how agents edit code
-        </h2>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
-        <!-- Card 1: Blast Radius -->
-        <div class="feature-card card-hover" style="background:linear-gradient(135deg, #FFF7ED 0%, #FFFFFF 100%);border-color:rgba(249,115,22,0.15);">
-          <div class="font-mono" style="font-size:11px;color:var(--warm);font-weight:600;margin-bottom:10px;letter-spacing:0.02em;">blast_radius(path, maxHops=4)</div>
-          <h3 class="font-display" style="font-size:23px;margin:0 0 10px;line-height:1.25;">See the ripple effect before touching code.</h3>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.65;margin:0 0 18px;">When an AI agent modifies an interface or helper, Ripple instantly maps the downstream blast radius across the whole repository, grouped by distance.</p>
-          <div class="code-block" style="font-size:11.5px;">
-<span class="c-key">{</span><br>
-&nbsp;&nbsp;<span class="c-str">"target"</span>: <span class="c-str">"src/types/api.ts"</span>,<br>
-&nbsp;&nbsp;<span class="c-str">"totalDependents"</span>: <span class="c-num">58</span>,<br>
-&nbsp;&nbsp;<span class="c-str">"hops"</span>: <span class="c-key">{</span> <span class="c-str">"1"</span>: <span class="c-num">13</span>, <span class="c-str">"2"</span>: <span class="c-num">30</span>, <span class="c-str">"3"</span>: <span class="c-num">9</span>, <span class="c-str">"4"</span>: <span class="c-num">6</span> <span class="c-key">}</span><br>
-<span class="c-key">}</span>
-          </div>
-        </div>
-        <!-- Card 2: Why Affected -->
-        <div class="feature-card card-hover" style="background:linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);border-color:rgba(79,70,229,0.15);">
-          <div class="font-mono" style="font-size:11px;color:var(--accent-2);font-weight:600;margin-bottom:10px;letter-spacing:0.02em;">why_affected(from, to)</div>
-          <h3 class="font-display" style="font-size:23px;margin:0 0 10px;line-height:1.25;">Trace the why behind every broken file.</h3>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.65;margin:0 0 18px;">Do not guess why a distant view broke. Ripple computes the exact shortest import path connecting any consumer to the root file.</p>
-          <div class="node-chain" style="background:var(--card);padding:14px;border-radius:10px;border:1px solid var(--border);">
-            <span class="node-chip">main.tsx</span>
-            <span class="arrow-glyph">&#8594;</span>
-            <span class="node-chip">app/index.tsx</span>
-            <span class="arrow-glyph">&#8594;</span>
-            <span class="node-chip">provider.tsx</span>
-            <span class="arrow-glyph">&#8594;</span>
-            <span class="node-chip">spinner.tsx</span>
-            <span class="arrow-glyph">&#8594;</span>
-            <span class="node-chip">cn.ts</span>
-          </div>
-        </div>
-        <!-- Card 3: Risk Hotspots -->
-        <div class="feature-card card-hover" style="background:linear-gradient(135deg, #EEF2FF 0%, #FFFFFF 100%);border-color:rgba(37,99,235,0.15);">
-          <div class="font-mono" style="font-size:11px;color:var(--accent-2);font-weight:600;margin-bottom:10px;letter-spacing:0.02em;">risk_hotspots(limit=10)</div>
-          <h3 class="font-display" style="font-size:23px;margin:0 0 10px;line-height:1.25;">Know your codebase's most dangerous files.</h3>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.65;margin:0 0 18px;">Analyzes in-degree centrality and PageRank in FalkorDB to rank files with the most incoming dependents.</p>
-          <div style="background:var(--card);padding:4px 18px;border-radius:10px;border:1px solid var(--border);">
-            <div class="rank-row">
-              <span class="font-mono" style="font-size:12.5px;color:var(--text);">1. button.tsx</span>
-              <span style="font-size:12px;color:var(--muted);font-weight:500;">27 dependents</span>
-            </div>
-            <div class="rank-row">
-              <span class="font-mono" style="font-size:12.5px;color:var(--text);">2. cn.ts</span>
-              <span style="font-size:12px;color:var(--muted);font-weight:500;">15 dependents</span>
-            </div>
-            <div class="rank-row">
-              <span class="font-mono" style="font-size:12.5px;color:var(--text);">3. auth.tsx</span>
-              <span style="font-size:12px;color:var(--muted);font-weight:500;">14 dependents</span>
-            </div>
-          </div>
-        </div>
-        <!-- Card 4: Safe Edit Order -->
-        <div class="feature-card card-hover" style="background:linear-gradient(135deg, #F5F3FF 0%, #FFFFFF 100%);border-color:rgba(124,58,237,0.15);">
-          <div class="font-mono" style="font-size:11px;color:var(--violet);font-weight:600;margin-bottom:10px;letter-spacing:0.02em;">safe_edit_order(path)</div>
-          <h3 class="font-display" style="font-size:23px;margin:0 0 10px;line-height:1.25;">Refactor in the exact order of dependency.</h3>
-          <p style="font-size:14px;color:var(--ink-2);line-height:1.65;margin:0 0 18px;">Returns an automated step-by-step recipe from distance 0 to distance N, ensuring tests and types stay aligned at every stage.</p>
-          <div style="background:var(--card);padding:8px 18px;border-radius:10px;border:1px solid var(--border);">
-            <div class="step-item">
-              <div class="step-num">1</div>
-              <div style="font-size:13.5px;color:var(--text);font-weight:500;">Target file. api.ts</div>
-            </div>
-            <div class="step-item">
-              <div class="step-num">2</div>
-              <div style="font-size:13.5px;color:var(--text);font-weight:500;">Primitives. types, utils, hooks</div>
-            </div>
-            <div class="step-item">
-              <div class="step-num">3</div>
-              <div style="font-size:13.5px;color:var(--text);font-weight:500;">Routes and pages. views, layouts</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Middle Big Logo Showcase Section -->
-  <section style="padding:60px 24px;background:#F4F4F5;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-    <div style="max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;text-align:left;">
-      <div style="position:relative;">
-        <div style="position:absolute;inset:-20px;background:radial-gradient(circle, rgba(79,70,229,0.12), transparent 70%);border-radius:50%;filter:blur(10px);"></div>
-        <img src="logo.png" alt="Ripple Neural Brain" style="width:190px;height:auto;position:relative;z-index:2;filter:drop-shadow(0 16px 30px rgba(0,0,0,0.12));transform:rotate(-2deg);">
+  <!-- Editorial Footer with Team Credits -->
+  <footer class="border-t border-outline-variant/30 py-12 bg-surface">
+    <div class="max-w-6xl mx-auto px-6 text-center space-y-4">
+      <div class="flex items-center justify-center gap-3">
+        <img src="logo.png" alt="Cube Logo" class="w-9 h-9 object-contain">
+        <span class="font-serif-display text-xl font-medium text-on-surface">SARVAM-RIPPLE</span>
       </div>
-      <div style="max-width:540px;">
-        <div class="eyebrow" style="margin-bottom:10px;color:var(--accent-2);">Neural Code Intelligence</div>
-        <h3 class="font-display" style="font-size:clamp(26px,3vw,34px);line-height:1.2;margin:0 0 14px;letter-spacing:-0.01em;">
-          Giving AI agents a persistent brain for your repository.
-        </h3>
-        <p style="font-size:15px;color:var(--ink-2);line-height:1.7;margin:0 0 20px;">
-          Most coding agents forget the codebase structure the moment they switch context. 
-          Ripple connects directly to <strong>FalkorDB</strong>, creating an external knowledge cortex that indexes imports, re-exports, and aliases into an immutable property graph.
-        </p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Sub-10ms Graph Traversal
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            100% Native Stdio MCP
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Zero AI Regressions
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FalkorDB Architecture -->
-  <section id="architecture" style="padding:72px 24px;">
-    <div style="max-width:1040px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:48px;">
-        <div class="eyebrow" style="margin-bottom:12px;">Architecture</div>
-        <h2 class="font-display" style="font-size:clamp(28px,3.5vw,38px);margin:0;line-height:1.2;">
-          Why FalkorDB is the engine for coding agents
-        </h2>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <!-- Graph Schema -->
-        <div class="card-hover" style="padding:28px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-            <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-deep)" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/><line x1="7" y1="8.5" x2="11" y2="16"/><line x1="17" y1="8.5" x2="13" y2="16"/></svg>
-            </div>
-            <div style="font-weight:600;font-size:16px;">Graph Schema</div>
-          </div>
-          <div class="code-block" style="font-size:12px;">
-<span class="c-com">// Nodes represent files with metadata</span><br>
-(<span class="c-key">:File</span> {<span class="c-str">path</span>: string, <span class="c-str">loc</span>: number})<br><br>
-<span class="c-com">// Edges represent import relationships</span><br>
-(<span class="c-key">:File</span>)-[<span class="c-key">:IMPORTS</span>]->(<span class="c-key">:File</span>)
-          </div>
-        </div>
-        <!-- Cypher Query -->
-        <div id="graph" class="card-hover" style="padding:28px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
-            <div style="width:36px;height:36px;border-radius:10px;background:var(--accent-2-soft);display:flex;align-items:center;justify-content:center;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-2)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <div style="font-weight:600;font-size:16px;">Cypher Blast Radius</div>
-          </div>
-          <div class="code-block" style="font-size:12px;">
-<span class="c-key">MATCH</span> (b:File {<span class="c-str">path</span>: <span class="c-num">$target</span>})<br>
-<span class="c-key">MATCH</span> p = (a:File)-[:IMPORTS*<span class="c-num">1</span>..<span class="c-num">4</span>]->(b)<br>
-<span class="c-key">RETURN</span> a.path <span class="c-key">AS</span> dependent,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-key">min</span>(<span class="c-key">length</span>(p)) <span class="c-key">AS</span> distance<br>
-<span class="c-key">ORDER BY</span> distance <span class="c-key">ASC</span>
-          </div>
-        </div>
-      </div>
-      <!-- Graph Visualization Panel -->
-      <div style="margin-top:16px;padding:28px;border-radius:14px;background:var(--card);border:1px solid var(--border);">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px;">
-          <div>
-            <div style="font-weight:600;font-size:16px;margin-bottom:4px;">Interactive Graph Browser</div>
-            <div style="font-size:13px;color:var(--muted);">Force-directed network view of your codebase at localhost:3000</div>
-          </div>
-          <!-- Clean floating legend completely outside the SVG canvas -->
-          <div style="display:flex;align-items:center;gap:18px;padding:6px 16px;border-radius:100px;background:#F4F4F5;border:1px solid var(--border);font-size:12px;font-weight:500;">
-            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#EA580C;"></span>Target (api.ts)</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#4F46E5;"></span>Hop 1</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#818CF8;"></span>Hop 2</span>
-            <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:rgba(24,24,27,0.25);"></span>Hop 3+</span>
-          </div>
-        </div>
-
-        <!-- SVG Graph Visualization (Unobstructed full canvas) -->
-        <svg viewBox="0 0 900 280" style="width:100%;height:280px;display:block;">
-          <defs>
-            <radialGradient id="ng1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#818CF8;stop-opacity:1"/>
-              <stop offset="100%" style="stop-color:#4F46E5;stop-opacity:1"/>
-            </radialGradient>
-            <radialGradient id="ng2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#C7D2FE;stop-opacity:1"/>
-              <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1"/>
-            </radialGradient>
-            <radialGradient id="ng3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1"/>
-              <stop offset="100%" style="stop-color:#EA580C;stop-opacity:1"/>
-            </radialGradient>
-          </defs>
-          <!-- Edges -->
-          <g stroke="rgba(24,24,27,0.12)" stroke-width="1.2">
-            <line x1="450" y1="140" x2="180" y2="60"/>
-            <line x1="450" y1="140" x2="720" y2="60"/>
-            <line x1="450" y1="140" x2="150" y2="210"/>
-            <line x1="450" y1="140" x2="750" y2="210"/>
-            <line x1="450" y1="140" x2="300" y2="240"/>
-            <line x1="450" y1="140" x2="620" y2="240"/>
-            <line x1="180" y1="60" x2="80" y2="35"/>
-            <line x1="180" y1="60" x2="280" y2="25"/>
-            <line x1="720" y1="60" x2="820" y2="35"/>
-            <line x1="720" y1="60" x2="620" y2="25"/>
-            <line x1="150" y1="210" x2="60" y2="250"/>
-            <line x1="750" y1="210" x2="840" y2="250"/>
-            <line x1="300" y1="240" x2="220" y2="270"/>
-            <line x1="620" y1="240" x2="700" y2="270"/>
-            <line x1="80" y1="35" x2="35" y2="85"/>
-            <line x1="280" y1="25" x2="340" y2="75"/>
-            <line x1="820" y1="35" x2="870" y2="90"/>
-            <line x1="620" y1="25" x2="560" y2="80"/>
-          </g>
-          <!-- Central Target Node -->
-          <circle cx="450" cy="140" r="22" fill="url(#ng3)" stroke="#9A3412" stroke-width="2"/>
-          <text x="450" y="144" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="white" font-weight="600">api.ts</text>
-          <!-- Hop 1 -->
-          <circle cx="180" cy="60" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="720" cy="60" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="150" cy="210" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="750" cy="210" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="300" cy="240" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <circle cx="620" cy="240" r="14" fill="url(#ng1)" stroke="#3730A3" stroke-width="1.5"/>
-          <!-- Hop 2 -->
-          <circle cx="80" cy="35" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="280" cy="25" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="820" cy="35" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="620" cy="25" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="60" cy="250" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="840" cy="250" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="220" cy="270" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <circle cx="700" cy="270" r="10" fill="url(#ng2)" stroke="#4338CA" stroke-width="1.2"/>
-          <!-- Hop 3 -->
-          <circle cx="35" cy="85" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="340" cy="75" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="870" cy="90" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-          <circle cx="560" cy="80" r="7" fill="rgba(24,24,27,0.15)" stroke="rgba(24,24,27,0.3)" stroke-width="1"/>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quickstart Tabs -->
-  <section id="quickstart" style="padding:72px 24px;background:#FFFFFF;border-top:1px solid var(--border);">
-    <div style="max-width:1040px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:48px;">
-        <div class="eyebrow" style="margin-bottom:12px;">Quickstart</div>
-        <h2 class="font-display" style="font-size:clamp(28px,3.5vw,38px);margin:0;line-height:1.2;">
-          Get graph-aware in three steps
-        </h2>
-      </div>
-      <div style="border-radius:14px;background:var(--card);border:1px solid var(--border);overflow:hidden;">
-        <div style="display:flex;border-bottom:1px solid var(--border);padding:4px 4px 0;background:#F8FAFC;overflow-x:auto;">
-          <button class="tab-btn active" data-tab="tab1">1. Start FalkorDB</button>
-          <button class="tab-btn" data-tab="tab2">2. Index Codebase</button>
-          <button class="tab-btn" data-tab="tab3">3. Add to MCP Config</button>
-        </div>
-        <div style="padding:28px;">
-          <div class="tab-content active" id="tab1">
-            <div style="font-size:14.5px;color:var(--ink-2);margin-bottom:16px;line-height:1.6;">Run FalkorDB locally via Docker. The graph database runs on port 6379 and the interactive browser on port 3000.</div>
-            <div class="code-block" style="font-size:12px;">
-docker run -d --name falkordb --restart unless-stopped -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest
-            </div>
-            <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;">
-              <span style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:#F0FDFA;border:1px solid rgba(13,148,136,0.2);font-size:12px;font-weight:500;color:var(--accent-deep);"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent);"></span>Graph DB: localhost:6379</span>
-              <span style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:#DBEAFE;border:1px solid rgba(37,99,235,0.2);font-size:12px;font-weight:500;color:var(--accent-2);"><span style="width:6px;height:6px;border-radius:50%;background:var(--accent-2);"></span>Browser: localhost:3000</span>
-            </div>
-          </div>
-          <div class="tab-content" id="tab2">
-            <div style="font-size:14.5px;color:var(--ink-2);margin-bottom:16px;line-height:1.6;">Point the indexer at your TypeScript or JavaScript project. Ripple parses the AST, resolves barrel files and aliases, then builds the graph.</div>
-            <div class="code-block" style="font-size:12px;">
-<span class="c-com"># Clone and build Ripple first</span><br>
-git clone https://github.com/trivikramkalagi91-commits/Ripple.git<br>
-cd Ripple && npm install && npm run build<br><br>
-<span class="c-com"># Index your project</span><br>
-node dist/cli.js index /path/to/your/project
-            </div>
-          </div>
-          <div class="tab-content" id="tab3">
-            <div style="font-size:14.5px;color:var(--ink-2);margin-bottom:16px;line-height:1.6;">Add Ripple to your AI editor's MCP configuration file. Works with Cursor, Claude Desktop, Antigravity IDE, and VS Code.</div>
-            <div class="code-block" style="font-size:12px;">
-<span class="c-key">{</span><br>
-&nbsp;&nbsp;<span class="c-str">"mcpServers"</span>: <span class="c-key">{</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"ripple"</span>: <span class="c-key">{</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"command"</span>: <span class="c-str">"node"</span>,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"args"</span>: [<span class="c-str">"/path/to/Ripple/dist/server.js"</span>]<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-key">}</span><br>
-&nbsp;&nbsp;<span class="c-key">}</span><br>
-<span class="c-key">}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer style="padding:56px 24px 32px;background:#0F172A;color:#CBD5E1;">
-    <div style="max-width:1040px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;">
-        <div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-            <img src="logo.png" alt="Ripple Logo" style="width:34px;height:28px;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
-            <span class="font-display" style="font-size:20px;color:#FFFFFF;">Ripple</span>
-          </div>
-          <div style="font-size:13.5px;color:#94A3B8;line-height:1.6;max-width:300px;">
-            Graph Intelligence for AI Coding Agents.<br>
-            Built with FalkorDB, TypeScript, and MCP.
-          </div>
-        </div>
-        <div style="display:flex;gap:64px;flex-wrap:wrap;">
-          <div>
-            <div style="font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#64748B;margin-bottom:14px;">Links</div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <a href="https://github.com/trivikramkalagi91-commits/Ripple" target="_blank" rel="noopener" style="font-size:14px;color:#CBD5E1;">GitHub Repository</a>
-              <a href="#" style="font-size:14px;color:#CBD5E1;">Documentation</a>
-              <a href="https://www.falkordb.com/" target="_blank" rel="noopener" style="font-size:14px;color:#CBD5E1;">FalkorDB Docs</a>
-            </div>
-          </div>
-          <div>
-            <div style="font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#64748B;margin-bottom:14px;">Legal</div>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <a href="#" style="font-size:14px;color:#CBD5E1;">Privacy Policy</a>
-              <a href="#" style="font-size:14px;color:#CBD5E1;">Terms and Conditions</a>
-              <span style="font-size:14px;color:#CBD5E1;">MIT License</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="margin-top:48px;padding-top:24px;border-top:1px solid rgba(148,163,184,0.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
-        <div style="font-size:12.5px;color:#64748B;">Ripple. Dependency graph intelligence for AI coding agents.</div>
-        <div style="font-size:12.5px;color:#64748B;font-family:'JetBrains Mono', monospace;">v0.1.0</div>
+      <p class="text-sm text-on-surface">
+        Built with ❤️ by <strong>Trivikram Kalagi</strong>, <strong>Shrihari Desai</strong>, <strong>Vinayak Pattar</strong> & <strong>Anand Sirigiri</strong>
+      </p>
+      <p class="font-mono text-xs text-on-surface-variant">
+        Powered by FalkorDB GraphBLAS, Sarvam AI Reasoning, and the Model Context Protocol (MCP).
+      </p>
+      <div class="pt-2 text-xs text-on-surface-variant">
+        <a href="https://github.com/shriharidesai209-commits/Sarvam-Ripple" target="_blank" rel="noopener noreferrer" class="hover:text-black underline underline-offset-4">GitHub Repository</a>
+        <span class="mx-2">•</span>
+        <a href="https://www.falkordb.com/" target="_blank" rel="noopener noreferrer" class="hover:text-black underline underline-offset-4">FalkorDB</a>
+        <span class="mx-2">•</span>
+        <a href="https://www.sarvam.ai/" target="_blank" rel="noopener noreferrer" class="hover:text-black underline underline-offset-4">Sarvam AI</a>
       </div>
     </div>
   </footer>
 
-</div>
+  <!-- Tab Switching & Copy Script -->
+  <script>
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
 
-<script>
-(function() {
-  var tabs = document.querySelectorAll('.tab-btn');
-  var contents = document.querySelectorAll('.tab-content');
-  
-  tabs.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var target = this.getAttribute('data-tab');
-      tabs.forEach(function(t) { t.classList.remove('active'); });
-      contents.forEach(function(c) { c.classList.remove('active'); });
-      this.classList.add('active');
-      document.getElementById(target).classList.add('active');
-    });
-  });
+      const targetTab = document.getElementById(`tab-${tabName}`);
+      const targetBtn = document.getElementById(`tab-btn-${tabName}`);
 
-  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
-      var href = this.getAttribute('href');
-      if (href.length > 1) {
-        var target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    });
-  });
-})();
-</script>
+      if (targetTab) targetTab.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyAgentPrompt() {
+      const text = document.getElementById('agentPromptText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyPromptBtn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Copied!';
+        btn.style.background = '#10b981';
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.style.background = '#705a44';
+        }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>

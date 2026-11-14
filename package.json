@@ -1,7 +1,7 @@
 {
-  "name": "ripple",
-  "version": "0.1.0",
-  "description": "FalkorDB-powered dependency graph and blast radius analyzer for AI coding agents",
+  "name": "sarvam-ripple",
+  "version": "1.0.0",
+  "description": "FalkorDB-powered dependency graph & Sarvam AI architectural safe-plan engine for AI coding agents",
   "main": "dist/index.js",
   "bin": {
     "ripple": "dist/cli.js"
@@ -10,11 +10,19 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "index": "node dist/cli.js index",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "index": "node dist/cli.js index"
   },
-  "keywords": ["mcp", "falkordb", "graph", "blast-radius", "code-intelligence"],
-  "author": "",
+  "keywords": [
+    "mcp",
+    "falkordb",
+    "sarvam-ai",
+    "graph",
+    "blast-radius",
+    "code-intelligence",
+    "safe-edit-order"
+  ],
+  "author": "Trivikram Kalagi, Shrihari Desai, Vinayak Pattar, Anand Sirigiri",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",

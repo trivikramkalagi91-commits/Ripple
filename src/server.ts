@@ -5,11 +5,12 @@ import {
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import { blastRadius, whyAffected, riskHotspots, safeEditOrder } from './tools.js';
+import { generateSarvamSafePlan } from './sarvam.js';
 
 const server = new Server(
   {
-    name: 'ripple',
-    version: '0.1.0',
+    name: 'sarvam-ripple',
+    version: '1.0.0',
   },
   {
     capabilities: {
@@ -18,14 +19,32 @@ const server = new Server(
   }
 );
 
-// Register Tool Definitions with explicit WHEN TO CALL guidance
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
+        name: 'generate_safe_plan',
+        description:
+          'Flagship tool: Call BEFORE modifying any file! Combines FalkorDB graph analysis with Sarvam AI to return the visual blast radius graph AND a step-by-step safe refactoring plan for all affected files in topological order.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            path: {
+              type: 'string',
+              description: 'The file path being modified (e.g. src/types/api.ts)',
+            },
+            proposedChange: {
+              type: 'string',
+              description: 'Description of the intended change (e.g. rename field "id" to "userId")',
+            },
+          },
+          required: ['path', 'proposedChange'],
+        },
+      },
+      {
         name: 'blast_radius',
         description:
-          'Call BEFORE editing, renaming, or changing the return type of any exported code. Returns all files that transitively import the target file, grouped by hop distance.',
+          'Calculates all files that transitively import the target file up to N hops away. Returns structured dependency counts and an in-chat visual Mermaid diagram.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -51,11 +70,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           properties: {
             from: {
               type: 'string',
-              description: 'The dependent consumer file that might be broken (e.g. src/main.tsx)',
+              description: 'The dependent consumer file (e.g. src/main.tsx)',
             },
             to: {
               type: 'string',
-              description: 'The dependency file being edited or changed (e.g. src/utils/cn.ts)',
+              description: 'The dependency file being edited (e.g. src/utils/cn.ts)',
             },
           },
           required: ['from', 'to'],
@@ -64,7 +83,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       {
         name: 'risk_hotspots',
         description:
-          'Returns the files in the repository with the highest number of incoming dependents (in-degree). Use this to see which core files carry the highest architectural risk.',
+          'Returns the files with the highest number of incoming dependents (in-degree). Identifies architectural single points of failure.',
         inputSchema: {
           type: 'object',
           properties: {
@@ -95,29 +114,66 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   };
 });
 
-// Handle Tool Execution
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
   try {
     switch (name) {
+      case 'generate_safe_plan': {
+        if (!args?.path || typeof args.path !== 'string') {
+          throw new Error('Missing required argument: "path" must be provided as a string');
+        }
+        const filePath = args.path.trim();
+        const proposedChange = args?.proposedChange ? String(args.proposedChange).trim() : 'Refactor file';
+        const radius = await blastRadius(filePath, 4);
+        const order = await safeEditOrder(filePath);
+        const sarvamPlan = await generateSarvamSafePlan(filePath, proposedChange, radius, order);
+
+        const responseText = `
+${sarvamPlan.markdownPlan}
+
+---
+
+### 📊 Dependency Blast Radius (Visual Graph)
+${radius.mermaidDiagram}
+
+---
+*Powered by FalkorDB (Sub-5ms GraphBLAS Engine) & Sarvam AI (Architectural Reasoning)*
+`.trim();
+
+        return {
+          content: [
+            {
+              type: 'text',
+              text: responseText,
+            },
+          ],
+        };
+      }
+
       case 'blast_radius': {
-        const filePath = String(args?.path);
+        if (!args?.path || typeof args.path !== 'string') {
+          throw new Error('Missing required argument: "path" must be provided as a string');
+        }
+        const filePath = args.path.trim();
         const maxHops = args?.maxHops ? Number(args.maxHops) : 4;
         const result = await blastRadius(filePath, maxHops);
         return {
           content: [
             {
               type: 'text',
-              text: JSON.stringify(result, null, 2),
+              text: `${JSON.stringify(result, null, 2)}\n\n### Visual Blast Radius:\n${result.mermaidDiagram}`,
             },
           ],
         };
       }
 
       case 'why_affected': {
-        const from = String(args?.from);
-        const to = String(args?.to);
+        if (!args?.from || !args?.to) {
+          throw new Error('Missing required arguments: both "from" and "to" are required');
+        }
+        const from = String(args.from).trim();
+        const to = String(args.to).trim();
         const result = await whyAffected(from, to);
         return {
           content: [
@@ -143,7 +199,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'safe_edit_order': {
-        const filePath = String(args?.path);
+        if (!args?.path || typeof args.path !== 'string') {
+          throw new Error('Missing required argument: "path" must be provided as a string');
+        }
+        const filePath = args.path.trim();
         const result = await safeEditOrder(filePath);
         return {
           content: [

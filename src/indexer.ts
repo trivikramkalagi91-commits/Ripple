@@ -17,23 +17,15 @@ export interface IndexResult {
   durationMs: number;
 }
 
-/**
- * Normalizes file paths to POSIX format relative to repository root.
- */
 export function normalizeRepoPath(fullPath: string, repoRoot: string): string {
   const rel = path.relative(repoRoot, fullPath);
   return rel.replace(/\\/g, '/');
 }
 
-/**
- * Checks whether a target file is a barrel file (e.g. index.ts that re-exports everything from other files).
- * Returns array of source files it re-exports from.
- */
 function getBarrelReExports(sourceFile: SourceFile): SourceFile[] {
   const reExportedFiles: SourceFile[] = [];
 
   for (const exportDecl of sourceFile.getExportDeclarations()) {
-    // Only look at export declarations with a module specifier e.g. export * from './foo' or export { x } from './foo'
     if (exportDecl.hasModuleSpecifier()) {
       const targetSource = exportDecl.getModuleSpecifierSourceFile();
       if (targetSource) {
@@ -45,46 +37,66 @@ function getBarrelReExports(sourceFile: SourceFile): SourceFile[] {
   return reExportedFiles;
 }
 
-/**
- * Resolves imported files from a source file.
- * Handles:
- * - Direct relative imports (./foo, ../bar)
- * - Tsconfig path aliases (@/*, ~/*) via ts-morph's built-in module resolution
- * - Barrel files / re-exports (traverses through index files re-exporting modules)
- */
+function tryResolveFallback(specifier: string, currentFileDir: string, allProjectFiles: Set<string>): string | undefined {
+  const extensions = ['.ts', '.tsx', '.js', '.jsx', '/index.ts', '/index.tsx', '/index.js', '/index.jsx', ''];
+
+  // Check if alias @/ or ~/
+  let relativeCandidate = '';
+  if (specifier.startsWith('@/')) {
+    relativeCandidate = specifier.replace(/^@\//, 'src/');
+  } else if (specifier.startsWith('~/')) {
+    relativeCandidate = specifier.replace(/^~\//, 'src/');
+  } else if (specifier.startsWith('.')) {
+    relativeCandidate = path.resolve(currentFileDir, specifier);
+  }
+
+  if (!relativeCandidate) return undefined;
+
+  for (const ext of extensions) {
+    const candidate = (relativeCandidate + ext).replace(/\\/g, '/');
+    for (const projectFile of allProjectFiles) {
+      const normProjectFile = projectFile.replace(/\\/g, '/');
+      if (normProjectFile.endsWith(candidate) || normProjectFile === candidate) {
+        return projectFile;
+      }
+    }
+  }
+
+  return undefined;
+}
+
 export function extractFileImports(sourceFile: SourceFile, allProjectFiles: Set<string>): {
   resolvedFiles: Set<string>;
   unresolvedSpecs: string[];
 } {
   const resolvedFiles = new Set<string>();
   const unresolvedSpecs: string[] = [];
+  const currentDir = sourceFile.getDirectoryPath();
 
-  // 1. Process regular imports (import ... from '...')
   for (const importDecl of sourceFile.getImportDeclarations()) {
     const specifier = importDecl.getModuleSpecifierValue();
     const targetSource = importDecl.getModuleSpecifierSourceFile();
+    let targetFilePath: string | undefined = targetSource ? (targetSource.getFilePath() as string) : undefined;
 
-    if (!targetSource) {
-      // Third-party packages (e.g. 'react', 'lodash') are ignored, but relative or aliased project imports that failed are counted
+    if (!targetFilePath) {
+      targetFilePath = tryResolveFallback(specifier, currentDir, allProjectFiles);
+    }
+
+    if (!targetFilePath) {
       if (specifier.startsWith('.') || specifier.startsWith('@/') || specifier.startsWith('~/')) {
         unresolvedSpecs.push(specifier);
       }
       continue;
     }
 
-    const targetFilePath = targetSource.getFilePath();
-
-    // Check if target is inside the project
     if (!allProjectFiles.has(targetFilePath)) {
       continue;
     }
 
-    // Add direct import target
     resolvedFiles.add(targetFilePath);
 
-    // If target is a barrel file, also resolve what it re-exports so transitive dependencies are captured
     const baseName = path.basename(targetFilePath);
-    if (/^index\.(ts|tsx|js|jsx|mts|cts)$/i.test(baseName)) {
+    if (/^index\.(ts|tsx|js|jsx|mts|cts)$/i.test(baseName) && targetSource) {
       const reExports = getBarrelReExports(targetSource);
       for (const reExported of reExports) {
         const reExportPath = reExported.getFilePath();
@@ -95,20 +107,23 @@ export function extractFileImports(sourceFile: SourceFile, allProjectFiles: Set<
     }
   }
 
-  // 2. Process re-exports declared directly in this file (export * from '...', export { x } from '...')
   for (const exportDecl of sourceFile.getExportDeclarations()) {
     if (exportDecl.hasModuleSpecifier()) {
-      const specifier = exportDecl.getModuleSpecifierValue();
+      const specifier = exportDecl.getModuleSpecifierValue() || '';
       const targetSource = exportDecl.getModuleSpecifierSourceFile();
+      let targetFilePath: string | undefined = targetSource ? (targetSource.getFilePath() as string) : undefined;
 
-      if (!targetSource) {
-        if (specifier?.startsWith('.') || specifier?.startsWith('@/') || specifier?.startsWith('~/')) {
+      if (!targetFilePath) {
+        targetFilePath = tryResolveFallback(specifier, currentDir, allProjectFiles);
+      }
+
+      if (!targetFilePath) {
+        if (specifier.startsWith('.') || specifier.startsWith('@/') || specifier.startsWith('~/')) {
           unresolvedSpecs.push(specifier);
         }
         continue;
       }
 
-      const targetFilePath = targetSource.getFilePath();
       if (allProjectFiles.has(targetFilePath)) {
         resolvedFiles.add(targetFilePath);
       }
@@ -118,131 +133,131 @@ export function extractFileImports(sourceFile: SourceFile, allProjectFiles: Set<
   return { resolvedFiles, unresolvedSpecs };
 }
 
-/**
- * Main indexer function that parses a repository and loads its File nodes and IMPORTS edges into FalkorDB.
- */
 export async function indexRepository(options: IndexerOptions): Promise<IndexResult> {
   const startTime = Date.now();
-  const repoPath = path.resolve(options.repoPath);
-  const graphName = options.graphName || 'ripple';
-  const host = options.falkorHost || 'localhost';
-  const port = options.falkorPort || 6379;
+  const repoRoot = path.resolve(options.repoPath);
+  const host = options.falkorHost || process.env.FALKOR_HOST || 'localhost';
+  const port = options.falkorPort || (process.env.FALKOR_PORT ? parseInt(process.env.FALKOR_PORT, 10) : 6379);
+  const graphName = options.graphName || process.env.FALKOR_GRAPH || 'ripple';
 
-  if (!fs.existsSync(repoPath)) {
-    throw new Error(`Repository path does not exist: ${repoPath}`);
+  if (!fs.existsSync(repoRoot)) {
+    throw new Error(`Repository path does not exist: ${repoRoot}`);
   }
 
-  console.log(`\n--- Ripple Indexer ---`);
-  console.log(`Repository: ${repoPath}`);
-  console.log(`FalkorDB Graph: ${graphName} (${host}:${port})`);
-
-  // Detect tsconfig.json if present
-  let tsConfigFilePath: string | undefined = path.join(repoPath, 'tsconfig.json');
-  if (!fs.existsSync(tsConfigFilePath)) {
-    // Check apps or nested tsconfig
-    tsConfigFilePath = undefined;
-  }
-
-  console.log(`Analyzing project structure... (tsconfig: ${tsConfigFilePath ? 'found' : 'not found, using glob'})`);
-
+  console.log(`[Sarvam-Ripple] Initializing AST project for ${repoRoot}...`);
   const project = new Project({
-    tsConfigFilePath,
     skipAddingFilesFromTsConfig: false,
+    skipFileDependencyResolution: false,
   });
 
-  if (!tsConfigFilePath) {
+  const tsConfigPath = path.join(repoRoot, 'tsconfig.json');
+  if (fs.existsSync(tsConfigPath)) {
+    console.log(`[Sarvam-Ripple] Loading tsconfig from ${tsConfigPath}...`);
+    project.addSourceFilesFromTsConfig(tsConfigPath);
+  } else {
+    console.log(`[Sarvam-Ripple] No tsconfig.json found, loading all TypeScript/JavaScript files...`);
     project.addSourceFilesAtPaths([
-      path.join(repoPath, '**/*.{ts,tsx,js,jsx,mjs,cjs}'),
-      `!${path.join(repoPath, '**/node_modules/**')}`,
-      `!${path.join(repoPath, '**/dist/**')}`,
-      `!${path.join(repoPath, '**/build/**')}`,
-      `!${path.join(repoPath, '**/.git/**')}`,
+      path.join(repoRoot, '**/*.{ts,tsx,js,jsx}'),
+      `!${path.join(repoRoot, '**/node_modules/**')}`,
+      `!${path.join(repoRoot, '**/dist/**')}`,
+      `!${path.join(repoRoot, '**/.next/**')}`,
+      `!${path.join(repoRoot, '**/build/**')}`,
     ]);
   }
 
-  const allSourceFiles = project.getSourceFiles().filter(sf => {
-    const p = sf.getFilePath();
-    return !p.includes('/node_modules/') && !p.includes('\\node_modules\\') &&
-           !p.includes('/dist/') && !p.includes('\\dist\\') &&
-           !p.includes('/.git/') && !p.includes('\\.git\\');
+  const allSourceFiles = project.getSourceFiles().filter((sf) => {
+    const fp = sf.getFilePath();
+    return !fp.includes('node_modules') && !fp.endsWith('.d.ts');
   });
 
-  console.log(`Discovered ${allSourceFiles.length} source files.`);
+  console.log(`[Sarvam-Ripple] Found ${allSourceFiles.length} source files to index.`);
+  const allProjectFiles = new Set(allSourceFiles.map((sf) => sf.getFilePath()));
 
-  const allProjectFilesSet = new Set<string>(allSourceFiles.map(sf => sf.getFilePath()));
+  const fileData: { path: string; loc: number }[] = [];
+  const edges: { from: string; to: string }[] = [];
+  let totalUnresolved = 0;
 
-  // Connect to FalkorDB
+  for (const sf of allSourceFiles) {
+    const rawPath = sf.getFilePath();
+    const relPath = normalizeRepoPath(rawPath, repoRoot);
+    const loc = sf.getEndLineNumber();
+
+    fileData.push({ path: relPath, loc });
+
+    const { resolvedFiles, unresolvedSpecs } = extractFileImports(sf, allProjectFiles);
+    totalUnresolved += unresolvedSpecs.length;
+
+    for (const targetRaw of resolvedFiles) {
+      const targetRel = normalizeRepoPath(targetRaw, repoRoot);
+      if (relPath !== targetRel) {
+        edges.push({ from: relPath, to: targetRel });
+      }
+    }
+  }
+
+  console.log(`[Sarvam-Ripple] Extracted ${fileData.length} files and ${edges.length} import edges.`);
+  console.log(`[Sarvam-Ripple] Connecting to FalkorDB at ${host}:${port} (graph: ${graphName})...`);
+
+  const username = process.env.FALKOR_USERNAME;
+  const password = process.env.FALKOR_PASSWORD;
   const db = await FalkorDB.connect({
-    socket: { host, port }
+    ...(username && { username }),
+    ...(password && { password }),
+    socket: { host, port },
   });
   const graph = db.selectGraph(graphName);
 
-  // Clear old graph data
-  console.log(`Clearing existing graph data in "${graphName}"...`);
   try {
-    await graph.query('MATCH (n) DETACH DELETE n');
-  } catch {
-    // Graph might be newly initialized, continue
-  }
-
-  // Create index on File path for fast MERGE & lookups
-  try {
-    await graph.query('CREATE INDEX FOR (f:File) ON (f.path)');
-  } catch (err: any) {
-    // Index might already exist, ignore
-  }
-
-  console.log(`Extracting imports and building graph nodes...`);
-
-  let edgeCount = 0;
-  let totalUnresolved = 0;
-
-  // Insert all File nodes in batches
-  const batchSize = 100;
-  for (let i = 0; i < allSourceFiles.length; i += batchSize) {
-    const batch = allSourceFiles.slice(i, i + batchSize);
-    for (const sf of batch) {
-      const normPath = normalizeRepoPath(sf.getFilePath(), repoPath);
-      const loc = sf.getEndLineNumber();
-      await graph.query(
-        'MERGE (f:File {path: $path}) ON CREATE SET f.loc = $loc ON MATCH SET f.loc = $loc',
-        { params: { path: normPath, loc } }
-      );
+    try {
+      await graph.delete();
+      console.log(`[Sarvam-Ripple] Cleared previous graph '${graphName}'.`);
+    } catch {
+      // Graph might not exist yet
     }
-  }
 
-  // Insert IMPORTS edges: (importer:File)-[:IMPORTS]->(imported:File)
-  for (const sf of allSourceFiles) {
-    const fromPath = normalizeRepoPath(sf.getFilePath(), repoPath);
-    const { resolvedFiles, unresolvedSpecs } = extractFileImports(sf, allProjectFilesSet);
-    totalUnresolved += unresolvedSpecs.length;
-
-    for (const resolvedTarget of resolvedFiles) {
-      const toPath = normalizeRepoPath(resolvedTarget, repoPath);
-      if (fromPath === toPath) continue; // Skip self-imports
-
-      await graph.query(
-        `MATCH (a:File {path: $fromPath}), (b:File {path: $toPath})
-         MERGE (a)-[:IMPORTS]->(b)`,
-        { params: { fromPath, toPath } }
-      );
-      edgeCount++;
+    try {
+      await graph.query('CREATE INDEX FOR (f:File) ON (f.path)');
+      console.log(`[Sarvam-Ripple] Enforced schema index on (:File {path}).`);
+    } catch {
+      // Index might already exist
     }
+
+    console.log(`[Sarvam-Ripple] Ingesting nodes into FalkorDB...`);
+    const BATCH_SIZE = 100;
+    for (let i = 0; i < fileData.length; i += BATCH_SIZE) {
+      const batch = fileData.slice(i, i + BATCH_SIZE);
+      const query = `
+        UNWIND $batch AS item
+        CREATE (:File { path: item.path, loc: item.loc })
+      `;
+      await graph.query(query, { params: { batch } });
+    }
+
+    console.log(`[Sarvam-Ripple] Ingesting relationships into FalkorDB...`);
+    const EDGE_BATCH = 100;
+    for (let i = 0; i < edges.length; i += EDGE_BATCH) {
+      const batch = edges.slice(i, i + EDGE_BATCH);
+      const query = `
+        UNWIND $batch AS edge
+        MATCH (from:File { path: edge.from })
+        MATCH (to:File { path: edge.to })
+        MERGE (from)-[:IMPORTS]->(to)
+      `;
+      await graph.query(query, { params: { batch } });
+    }
+
+    const durationMs = Date.now() - startTime;
+    console.log(
+      `[Sarvam-Ripple] Successfully indexed in ${durationMs}ms: ${fileData.length} files, ${edges.length} edges, ${totalUnresolved} unresolved external specifiers.`
+    );
+
+    return {
+      fileCount: fileData.length,
+      edgeCount: edges.length,
+      unresolvedCount: totalUnresolved,
+      durationMs,
+    };
+  } finally {
+    await db.close();
   }
-
-  await db.close();
-
-  const durationMs = Date.now() - startTime;
-  console.log(`\nIndexing complete!`);
-  console.log(`- Files indexed: ${allSourceFiles.length}`);
-  console.log(`- IMPORTS edges created: ${edgeCount}`);
-  console.log(`- Unresolved project imports: ${totalUnresolved}`);
-  console.log(`- Time taken: ${(durationMs / 1000).toFixed(2)}s\n`);
-
-  return {
-    fileCount: allSourceFiles.length,
-    edgeCount,
-    unresolvedCount: totalUnresolved,
-    durationMs,
-  };
 }

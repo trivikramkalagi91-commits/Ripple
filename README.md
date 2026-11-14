@@ -1,230 +1,213 @@
 <div align="center">
-  <img src="logo.png" alt="Ripple Logo" width="140" />
-  <h1>Ripple</h1>
-  <p><strong>FalkorDB-Powered Dependency Graph & Blast Radius Intelligence for AI Coding Agents</strong></p>
+  <img src="logo.png" alt="Ripple & Sarvam-Ripple Logo" width="140" />
+  <h1>Ripple & Sarvam-Ripple</h1>
+  <p><strong>FalkorDB-Powered Dependency Graph & Sarvam AI Architectural Guardian for AI Coding Agents</strong></p>
   <p>
-    <a href="https://ripple-graph.vercel.app"><strong>Live Website</strong></a> &bull;
-    <a href="https://github.com/trivikramkalagi91-commits/Ripple"><strong>GitHub</strong></a> &bull;
-    <a href="https://www.falkordb.com/"><strong>FalkorDB</strong></a>
+    <em>Conceived & Created by <strong>Trivikram Kalagi</strong></em>
+  </p>
+  <p>
+    <a href="https://sarvam-ripple.vercel.app"><strong>🌐 Sarvam AI Edition (2nd Prize 🥈)</strong></a> &bull;
+    <a href="https://ripple-graph.vercel.app"><strong>🌐 Original Graph Hack Edition</strong></a> &bull;
+    <a href="https://github.com/trivikramkalagi91-commits/Ripple"><strong>GitHub Repository</strong></a> &bull;
+    <a href="https://www.falkordb.com/"><strong>FalkorDB</strong></a> &bull;
+    <a href="https://www.sarvam.ai/"><strong>Sarvam AI</strong></a>
   </p>
 </div>
 
 ---
 
-## The Problem: Coding Agents Break Code in the Dark
-When AI coding agents (Claude, Cursor, Copilot, Antigravity) edit or refactor code in large codebases, they operate with a narrow view. A simple change to a core interface, utility function, or barrel export silently breaks consumers 2, 3, or 4 hops away.
+### 🏆 Hackathon Honors & Editions Overview
 
-Plain text search / grep cannot solve this:
-- Re-exports and barrel files (`export * from './...'`) mask true dependency chains.
-- Path aliases (`@/components`, `~/utils`) confuse simple directory searches.
-- Common identifier names (`id`, `name`, `status`) generate thousands of false positive grep matches.
+Both editions of this project were conceived, designed, and developed by **Trivikram Kalagi**, evolving across two competitive hackathons to solve the biggest problem in autonomous AI software engineering: **agents editing code in the dark**.
 
----
-
-## The Solution: Ripple
-**Ripple** is a high-performance Model Context Protocol (MCP) server powered by **FalkorDB**. It ingests a repository AST into a connected property graph:
-- **Nodes**: `(:File {path, loc})`
-- **Edges**: `(:File)-[:IMPORTS]->(:File)`
-- Automatic resolution of `tsconfig.json` path aliases and barrel re-exports.
-
-AI coding agents query Ripple *before* making changes to know the real blast radius, the exact shortest import chain, and the safe topological edit order.
-
-<div align="center">
-  <img src="falkordb-graph.png" alt="FalkorDB Dependency Graph" width="750" />
-  <p><em>Force-directed dependency graph of 128 nodes and 445 edges running live in FalkorDB Browser</em></p>
-</div>
+| Edition | Hackathon Event | Recognition | Live Deployment | Core Innovation |
+| :--- | :--- | :--- | :--- | :--- |
+| **Sarvam-Ripple** *(Latest)* | **Build with Sarvam AI Hackathon** (REVA University, Nov 2026) | 🥈 **2nd Prize Winner** (1st Runner Up) | [**sarvam-ripple.vercel.app**](https://sarvam-ripple.vercel.app) | **Sarvam-105B MoE Safe Planner** + **FalkorDB Cloud** + In-Chat Color Mermaid + 1-Click Autonomous Agent Setup |
+| **Ripple** *(Original)* | **Graph Hack / FalkorDB Hackathon** (Oct 2026) | Featured Project | [**ripple-graph.vercel.app**](https://ripple-graph.vercel.app) | **FalkorDB GraphBLAS Engine** + Sub-5ms Multi-Hop Traversals + Shortest Import Path & Hotspot Detection |
 
 ---
 
-## Architecture Overview
+## ⚡ What was Updated in the Sarvam AI Version? (Key Differences)
 
-Ripple bridges static code analysis, low-latency graph databases, and LLM-powered coding agents via the Model Context Protocol (MCP):
+The original **Ripple** gave AI agents raw mathematical graph queries (nodes and edges). **Sarvam-Ripple** upgraded this into an **Autonomous Architectural Guardian**:
+
+```mermaid
+flowchart LR
+    subgraph Original["1. Graph Hack Edition (Ripple)"]
+        direction TB
+        F1["FalkorDB Local Docker (:6379)"] --> G1["Raw Graph Traversal"]
+        G1 --> R1["JSON Node / Edge Lists"]
+    end
+
+    subgraph SarvamUpgrade["2. Sarvam AI Edition (Sarvam-Ripple 🥈)"]
+        direction TB
+        F2["FalkorDB Cloud (AWS Mumbai)"] --> G2["Sub-5ms GraphBLAS"]
+        G2 --> S1["Sarvam AI (sarvam-105b MoE)"]
+        S1 --> P1["Topological Multi-Step Safe Plan"]
+        P1 --> M1["Live In-Chat Visual Mermaid Graph"]
+    end
+
+    Original -->|Evolution| SarvamUpgrade
+```
+
+### Detailed Upgrade Comparison
+
+| Feature / Capability | Original Graph Hack Edition (`ripple`) | Upgraded Sarvam AI Edition (`sarvam-ripple` 🥈) |
+| :--- | :--- | :--- |
+| **AI Reasoning Layer** | ❌ None (Returned raw Cypher query results) | ✅ **Sarvam AI (`sarvam-105b`) MoE**: Analyzes affected code diffs and writes step-by-step refactor plans |
+| **Flagship MCP Tool** | `blast_radius`, `why_affected` | ✅ **`generate_safe_plan`**: Combines FalkorDB graph traversal with Sarvam AI reasoning in 1 tool call |
+| **Database Deployment** | Local Docker required (`localhost:6379`) | ✅ **FalkorDB Cloud** (AWS Mumbai `ap-south-1`) with zero local Docker dependency + automatic fallback |
+| **Visual In-Chat Graph** | Text-only JSON/tables | ✅ **Dynamic Color-Coded Mermaid Diagram**: Green (Target), Red (Hop 1), Orange (Hop 2), Yellow (Hop 3), White (Hop 4) |
+| **Agent Setup Experience** | Manual CLI build & configuration | ✅ **1-Click Agent Setup Prompt**: Paste 1 prompt into Cursor/Antigravity for autonomous install & indexing |
+| **AST Alias Resolution** | Basic file imports | ✅ Enhanced `ts-morph` AST parser resolving `@/*` tsconfig path aliases and barrel `index.ts` re-exports |
+| **Frontend & Design** | Standard dark theme | ✅ Editorial **Google Stitch Theme**: Warm `#faf9f6` canvas, `Newsreader` + `Inter` typography, 3D Rubik's cube mascot |
+
+---
+
+## 🚨 The Problem: AI Coding Agents Break Code in the Dark
+
+When modern AI coding agents (Claude, Cursor, Copilot, Antigravity) and **"Vibecoders"** edit or refactor code in medium-to-large repositories, they operate with dangerous **tunnel vision**. A single change to an exported function, interface, or shared utility silently breaks downstream consumers 2, 3, or 4 hops away.
+
+Plain text search and `grep` fail completely:
+- **Barrel re-exports** (`export * from './...'`) mask true dependency chains.
+- **Path aliases** (`@/components`, `~/utils`) hide actual file paths on disk.
+- **Common identifier names** (`id`, `user`, `status`) return hundreds of false-positive grep matches.
+- **No topological ordering**: AI assistants don't know which order to edit files to avoid cascading build breakages.
+
+---
+
+## ⚡ The Solution: Sarvam-Ripple Architecture
+
+Sarvam-Ripple pairs **FalkorDB's** sub-5ms graph traversals with **Sarvam AI's** deep architectural reasoning over the **Model Context Protocol (MCP)**:
 
 ```mermaid
 flowchart TD
-    subgraph Repo["1. Target Codebase"]
-        SourceFiles["Source Files (.ts, .tsx, .js)"]
+    subgraph TargetRepo["1. Target Codebase"]
+        SourceFiles["Source Files (.ts, .tsx, .js, .jsx)"]
         TSConfig["tsconfig.json & Path Aliases (@/*)"]
         Barrels["Barrel Re-exports (index.ts)"]
     end
 
-    subgraph Ingestion["2. Ripple AST Indexer (CLI)"]
-        TSMorph["ts-morph AST Parser"]
-        PathResolver["Static Import Resolver"]
-        GraphBuilder["Property Graph Builder"]
-        TSMorph --> PathResolver --> GraphBuilder
+    subgraph Indexer["2. AST Ingestion Engine (ts-morph)"]
+        Parser["AST Parser & Resolver"]
+        GraphMapper["Property Graph Builder"]
+        Parser --> GraphMapper
     end
 
-    subgraph DB["3. FalkorDB Graph Engine"]
-        FalkorCore["FalkorDB (GraphBLAS Engine :6379)"]
-        Nodes["(:File {path, loc}) Nodes"]
-        Edges["(:File)-[:IMPORTS]->(:File) Edges"]
-        Index["Schema Index ON :File(path)"]
-        Algorithms["Native Graph Algorithms (PageRank, In-Degree)"]
-        FalkorCore --- Nodes
-        FalkorCore --- Edges
-        FalkorCore --- Index
-        FalkorCore --- Algorithms
+    subgraph FalkorEngine["3. FalkorDB Cloud Graph Engine (GraphBLAS)"]
+        Nodes["(:File {path, loc})"]
+        Edges["(:File)-[:IMPORTS]->(:File)"]
+        Sub5ms["Sub-5ms Sparse Matrix Multiplication"]
     end
 
-    subgraph Server["4. Ripple MCP Server (stdio)"]
-        MCPLayer["Model Context Protocol (JSON-RPC Layer)"]
-        Tool1["blast_radius(path, maxHops)"]
-        Tool2["why_affected(from, to)"]
-        Tool3["risk_hotspots(limit)"]
-        Tool4["safe_edit_order(path)"]
-        MCPLayer --> Tool1
-        MCPLayer --> Tool2
-        MCPLayer --> Tool3
-        MCPLayer --> Tool4
+    subgraph SarvamIntelligence["4. Sarvam AI Reasoning Layer (sarvam-105b)"]
+        BlastEval["Multi-Hop Blast Radius Evaluator"]
+        TopoSort["Topological Edit Sequencer"]
+        SafePlan["Step-by-Step Refactor Roadmap"]
+        BlastEval --> TopoSort --> SafePlan
     end
 
-    subgraph Agents["5. AI Coding Agents & IDEs"]
-        Cursor["Cursor"]
-        Claude["Claude Desktop"]
-        Copilot["GitHub Copilot"]
-        Antigravity["Antigravity IDE"]
+    subgraph AgentClient["5. AI Coding Agent (Cursor / Antigravity / Claude)"]
+        MCPClient["MCP Protocol Stdio Client"]
+        InChatGraph["In-Chat Mermaid Visualization"]
+        AutoExecution["Zero-Regression Code Execution"]
     end
 
-    SourceFiles --> TSMorph
-    TSConfig --> PathResolver
-    Barrels --> PathResolver
-
-    GraphBuilder -- "Ingest AST & Enforce Schema" --> FalkorCore
-
-    Tool1 -- "Cypher Multi-Hop Expansion (*1..N)" --> FalkorCore
-    Tool2 -- "Shortest Path Matrix Query" --> FalkorCore
-    Tool3 -- "Centrality & PageRank" --> FalkorCore
-    Tool4 -- "Topological BFS Ordering" --> FalkorCore
-
-    Agents -- "MCP Tool Calls (JSON-RPC)" --> MCPLayer
-    MCPLayer -- "Blast Radius & Topological Plan" --> Agents
+    TargetRepo --> Indexer
+    Indexer --> FalkorEngine
+    FalkorEngine --> SarvamIntelligence
+    SarvamIntelligence --> AgentClient
 ```
-
-### How the Pipeline Works:
-1. **AST Ingestion (`cli.ts`)**: Parses TypeScript/JavaScript abstract syntax trees with `ts-morph`, resolves `tsconfig` paths and barrel exports, and generates a clean property graph.
-2. **Graph Storage (`FalkorDB`)**: Stores files as `(:File)` nodes and imports as `(:File)-[:IMPORTS]->(:File)` directed edges with indexed paths for $O(1)$ lookups.
-3. **MCP Tool Execution (`server.ts`)**: Runs Cypher queries through FalkorDB's GraphBLAS matrix traversal engine, resolving multi-hop paths in 3–5ms.
-4. **Agent Action**: The coding agent queries Ripple before executing refactors, preventing regressions before modifying code.
 
 ---
 
-## The 4 MCP Tools
+## ⚡ 1-Click Agent Setup Prompt (Copy & Paste Into Your AI Agent)
 
-| Tool | When AI Coding Agents Call It | What It Returns |
+> **💡 Zero Manual Setup:** Copy the prompt below and paste it directly into your AI coding assistant (Cursor, Claude Desktop, or Antigravity). The agent will autonomously spin up FalkorDB, install Sarvam-Ripple, index your repository, and enforce graph-safety enforcement:
+
+```text
+Please install and set up Sarvam-Ripple for this workspace by performing the following steps:
+
+1. Check FalkorDB availability:
+   - Check if FalkorDB is reachable on localhost:6379.
+   - If not reachable, check if Docker is installed and running (`docker ps`).
+   - If Docker is running, start FalkorDB:
+     docker run -d --name falkordb --restart unless-stopped -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest
+   - If Docker or FalkorDB is NOT installed on this machine, guide the user:
+     "Neither Docker nor FalkorDB was detected locally. You have two instant options:
+      Option A (Zero-install Cloud - Recommended): Create a free database in 30 seconds at https://app.falkordb.cloud (no Docker required). Share your Host, Port, and Password, and I will configure .env automatically!
+      Option B (Local): Install Docker Desktop (https://www.docker.com) or install FalkorDB natively (`brew install falkordb/tap/falkordb` or `curl -fsSL https://www.falkordb.com/install.sh | bash`)."
+
+2. Clone and build Sarvam-Ripple into a local helper folder:
+   git clone https://github.com/trivikramkalagi91-commits/Ripple.git .sarvam-ripple
+   cd .sarvam-ripple && npm install && npm run build && cd ..
+
+3. Configure environment:
+   In `.sarvam-ripple/.env`, set:
+   SARVAM_API_KEY=<your_sarvam_api_key>
+   FALKOR_HOST=localhost (or your FalkorDB Cloud host)
+   FALKOR_PORT=6379 (or your FalkorDB Cloud port)
+
+4. Index this repository into FalkorDB:
+   node .sarvam-ripple/dist/cli.js index .
+
+5. Add the following rule to your instructions:
+   "Before modifying, renaming, or refactoring any exported function, type, or component, you MUST consult Sarvam-Ripple's generate_safe_plan tool (or run `node .sarvam-ripple/dist/cli.js plan <file> -c '<change>'`) to inspect the multi-hop blast radius and apply all edits in topological safe order so nothing breaks."
+
+Confirm when setup and indexing are complete!
+```
+
+---
+
+## 🛠️ MCP Tools Reference
+
+Sarvam-Ripple exposes 5 specialized tools over the Model Context Protocol:
+
+| Tool Name | Type | Description |
 | :--- | :--- | :--- |
-| **`blast_radius(path, maxHops=4)`** | **Before** editing, renaming, or modifying any function/type/component | All transitively affected files grouped by hop distance (1 to N) |
-| **`why_affected(from, to)`** | When diagnosing how a change in `to` impacts a distant file `from` | The shortest direct import chain connecting the two files |
-| **`risk_hotspots(limit=10)`** | When prioritizing tests or assessing architectural risk | Top files in the repo with highest incoming dependents (in-degree / PageRank) |
-| **`safe_edit_order(path)`** | Before performing a multi-file refactor | Affected files ordered topologically by distance from target for safe incremental refactoring |
+| **`generate_safe_plan`** | 🌟 **Flagship** | Computes multi-hop blast radius in FalkorDB, evaluates breaking changes with **Sarvam-105B**, and returns the in-chat Mermaid diagram + topological safe edit plan. |
+| **`blast_radius`** | Query | Returns all downstream dependent files up to $N$ hops with distance categorization. |
+| **`why_affected`** | Query | Discovers the exact shortest import chain between two files (`(:File)-[:IMPORTS*]->(:File)`). |
+| **`risk_hotspots`** | Query | Identifies the most critical files with the highest incoming dependency count across the repository. |
+| **`safe_edit_order`** | Query | Returns the topological sequence ensuring base utilities are refactored before dependent consumers. |
 
 ---
 
-## First-Time User Setup Guide (3 Minutes)
+## 🚀 Quickstart Guide (Local Development)
 
-Follow these 4 simple steps to get Ripple up and running:
-
-### Step 1: Start FalkorDB
-Ripple requires FalkorDB to store and query the dependency graph. Choose whichever option you prefer:
-
-#### Option A: Local Docker (Recommended)
-Run this single command to start FalkorDB and keep it running automatically in the background across reboots:
-```bash
-docker run -d --name falkordb --restart unless-stopped -p 6379:6379 -p 3000:3000 falkordb/falkordb:latest
+### 1. Configure `.env`
+```env
+SARVAM_API_KEY=your_sarvam_api_key
+SARVAM_MOCK=false
+FALKOR_HOST=localhost # or your FalkorDB Cloud host
+FALKOR_PORT=6379
+FALKOR_USERNAME=falkordb
+FALKOR_PASSWORD=your_password
+FALKOR_GRAPH=ripple
 ```
-- **Graph Database**: `localhost:6379`
-- **Interactive Visual Browser**: [http://localhost:3000](http://localhost:3000) (select graph `ripple` to explore your codebase visually)
 
-#### Option B: FalkorDB Cloud (No Docker needed)
-If you don't use Docker, create a free instance at [app.falkordb.cloud](https://app.falkordb.cloud) and pass your host/password via environment variables.
-
----
-
-### Step 2: Clone and Build Ripple
+### 2. Build and Index
 ```bash
-git clone https://github.com/trivikramkalagi91-commits/Ripple.git
-cd Ripple
 npm install
 npm run build
+
+# Index any repository into FalkorDB:
+node dist/cli.js index demo-repo
 ```
 
----
-
-### Step 3: Index Your Project Repository
-Run the indexer pointing to the TypeScript or JavaScript codebase you want your AI agent to work on:
+### 3. Generate a Safe Plan
 ```bash
-node dist/cli.js index C:/path/to/your/project
-```
-*Tip: You only need to run this command once (or when major architectural changes occur). Ripple will parse the AST, resolve all barrel files and `@/` aliases, and construct the graph in FalkorDB in seconds.*
-
----
-
-### Step 4: Connect Ripple to Your AI Editor (MCP Configuration)
-Add Ripple to your AI tool's MCP configuration file (e.g. Cursor, Claude Desktop, Antigravity IDE, or VS Code):
-
-#### Cursor / Claude Desktop / Antigravity IDE (`mcp_config.json`)
-```json
-{
-  "mcpServers": {
-    "ripple": {
-      "command": "node",
-      "args": [
-        "C:/path/to/Ripple/dist/server.js"
-      ],
-      "env": {}
-    }
-  }
-}
-```
-
-#### Optional: Add the Agent Enforcement Rule
-Add this to your project repository's `AGENTS.md` (or `CLAUDE.md` / `.cursorrules`):
-```markdown
-# Ripple Blast Radius Enforcement
-Before modifying, renaming, or refactoring any exported function, type, or component,
-you MUST invoke the `blast_radius` MCP tool on its file and ensure all downstream affected files are updated.
+node dist/cli.js plan demo-repo/src/types/api.ts -c "Rename field id to userId"
 ```
 
 ---
 
-## How It Works In Practice
-Once installed, **you don't have to run any CLI commands during your daily coding!**
-1. You chat with your AI agent as usual:
-   > *"Hey, please update `src/types/api.ts` to rename `id` to `entityId`."*
-2. Your AI agent automatically checks the Ripple MCP tool behind the scenes:
-   - It queries FalkorDB: `blast_radius('src/types/api.ts')`.
-   - It sees that 58 downstream files across 4 hop distances depend on this type.
-   - It updates the target file and all downstream consumers in `safe_edit_order` so nothing breaks!
+## 👥 Authors & Acknowledgments
 
----
+- **Trivikram Kalagi** — *Creator, Architect & Lead Developer*
+- **Shrihari Desai** — *Contributor (Build with Sarvam AI Hackathon)*
+- **Vinayak Pattar** — *Contributor (Build with Sarvam AI Hackathon)*
+- **Anand Sirigiri** — *Contributor (Build with Sarvam AI Hackathon)*
+- **Suhas Hannamanavar** — *Contributor (Graph Hackathon Edition)*
 
-## Optional: Inspecting & Querying from CLI (For Developers)
-If you want to query the graph directly in your terminal without an AI:
-```bash
-# Calculate blast radius:
-node dist/cli.js query blast_radius src/types/api.ts
-
-# Trace the shortest dependency chain between two files:
-node dist/cli.js query why_affected src/main.tsx src/utils/cn.ts
-
-# List architectural risk hotspots:
-node dist/cli.js query risk_hotspots
-
-# Get safe topological edit order:
-node dist/cli.js query safe_edit_order src/components/ui/button/button.tsx
-```
-
----
-
-## Project Info
-- **Live Website**: [https://ripple-graph.vercel.app](https://ripple-graph.vercel.app)
-- **Built by**: **Trivikram Kalagi** & **Suhas Hannamanavar**
-- **Built with**: FalkorDB, TypeScript, ts-morph, @modelcontextprotocol/sdk
-- **License**: MIT
-
----
-
-<div align="center">
-  <p>Built with ❤️ by <strong>Trivikram Kalagi</strong> and <strong>Suhas Hannamanavar</strong></p>
-</div>
-
+Special thanks to the **Sarvam AI** team and the **FalkorDB** team for hosting incredible hackathons that push the boundaries of developer tooling and graph-powered AI agents!

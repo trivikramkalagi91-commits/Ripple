@@ -2,20 +2,21 @@
 import { Command } from 'commander';
 import { indexRepository } from './indexer.js';
 import { blastRadius, whyAffected, riskHotspots, safeEditOrder } from './tools.js';
+import { generateSarvamSafePlan } from './sarvam.js';
 
 const program = new Command();
 
 program
-  .name('ripple')
-  .description('FalkorDB-powered dependency graph and blast radius analyzer')
-  .version('0.1.0');
+  .name('sarvam-ripple')
+  .description('FalkorDB-powered dependency graph and Sarvam AI architectural safe plan generator')
+  .version('1.0.0');
 
 program
   .command('index <repoPath>')
   .description('Index a TypeScript/JavaScript repository into FalkorDB')
-  .option('-g, --graph <name>', 'FalkorDB graph name', 'ripple')
-  .option('-H, --host <host>', 'FalkorDB host', 'localhost')
-  .option('-p, --port <port>', 'FalkorDB port', (val) => parseInt(val, 10), 6379)
+  .option('-g, --graph <name>', 'FalkorDB graph name', process.env.FALKOR_GRAPH || 'ripple')
+  .option('-H, --host <host>', 'FalkorDB host', process.env.FALKOR_HOST || 'localhost')
+  .option('-p, --port <port>', 'FalkorDB port', (val) => parseInt(val, 10), process.env.FALKOR_PORT ? parseInt(process.env.FALKOR_PORT, 10) : 6379)
   .action(async (repoPath, options) => {
     try {
       await indexRepository({
@@ -26,6 +27,31 @@ program
       });
     } catch (err: any) {
       console.error('Indexing failed:', err.message || err);
+      process.exit(1);
+    }
+  });
+
+program
+  .command('plan <filePath>')
+  .description('Generate a complete Sarvam AI safe refactoring plan for a proposed file modification')
+  .argument('<filePath>', 'File to modify')
+  .option('-c, --change <description>', 'Proposed code change', 'Refactor file')
+  .option('-g, --graph <name>', 'FalkorDB graph name', 'ripple')
+  .action(async (filePath, options) => {
+    try {
+      console.log(`[Sarvam-Ripple] Evaluating blast radius for ${filePath} in FalkorDB...`);
+      const radius = await blastRadius(filePath, 4, { graphName: options.graph });
+      const order = await safeEditOrder(filePath, { graphName: options.graph });
+      console.log(`[Sarvam-Ripple] Generating architectural safe plan via Sarvam AI...`);
+      const plan = await generateSarvamSafePlan(filePath, options.change, radius, order);
+
+      console.log('\n======================================================');
+      console.log(plan.markdownPlan);
+      console.log('======================================================\n');
+      console.log('Visual Blast Radius (Mermaid):');
+      console.log(radius.mermaidDiagram);
+    } catch (err: any) {
+      console.error('Planning failed:', err.message || err);
       process.exit(1);
     }
   });
