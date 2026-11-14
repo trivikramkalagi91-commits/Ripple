@@ -1,5 +1,9 @@
 <div align="center">
-  <img src="logo.png" alt="Ripple & Sarvam-Ripple Logo" width="140" />
+  <p align="center">
+    <img src="logo.png" alt="Ripple Brain Logo" width="130" />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="cube-logo.png" alt="Sarvam-Ripple 3D Cube Logo" width="130" />
+  </p>
   <h1>Ripple & Sarvam-Ripple</h1>
   <p><strong>FalkorDB-Powered Dependency Graph & Sarvam AI Architectural Guardian for AI Coding Agents</strong></p>
   <p>
