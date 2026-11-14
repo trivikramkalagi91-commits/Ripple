@@ -205,9 +205,6 @@ node dist/cli.js plan demo-repo/src/types/api.ts -c "Rename field id to userId"
 ## 👥 Authors & Acknowledgments
 
 - **Trivikram Kalagi** — *Creator, Architect & Lead Developer*
-- **Shrihari Desai** — *Contributor (Build with Sarvam AI Hackathon)*
-- **Vinayak Pattar** — *Contributor (Build with Sarvam AI Hackathon)*
-- **Anand Sirigiri** — *Contributor (Build with Sarvam AI Hackathon)*
-- **Suhas Hannamanavar** — *Contributor (Graph Hackathon Edition)*
+- **Suhas Hannamanavar** — *Co-Developer*
 
-Special thanks to the **Sarvam AI** team and the **FalkorDB** team for hosting incredible hackathons that push the boundaries of developer tooling and graph-powered AI agents!
+Special thanks to the **FalkorDB** and **Sarvam AI** teams for hosting incredible hackathons that push the boundaries of developer tooling and graph-powered AI agents!

@@ -22,7 +22,7 @@
     "code-intelligence",
     "safe-edit-order"
   ],
-  "author": "Trivikram Kalagi, Shrihari Desai, Vinayak Pattar, Anand Sirigiri",
+  "author": "Trivikram Kalagi, Suhas Hannamanavar",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
