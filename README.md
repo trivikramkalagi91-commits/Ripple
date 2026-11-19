@@ -52,6 +52,15 @@ Plain text search and `grep` fail completely:
 3. **Architectural Safe Plan**: Analyzes the affected files in topological sequence and writes an exact step-by-step code modification plan before any code is modified.
 4. **Autonomous Zero-Regression Execution**: The AI coding agent applies the changes file-by-file without breaking builds or tests.
 
+---
+
+## 💡 Works 100% Without Any External API Key (Native Agent Intelligence)
+
+A core design principle of **Ripple** is that **no third-party API key is required**:
+- 🆓 **Zero Extra API Keys Needed**: Ripple operates completely standalone using your AI coding assistant's **own native intelligence** (Cursor, Claude, Copilot, Antigravity). Your agent queries Ripple's FalkorDB graph tools (`blast_radius`, `why_affected`, `risk_hotspots`, `safe_edit_order`) and uses its own built-in reasoning to safely refactor affected files in topological sequence.
+- ⚡ **Optional External LLM Acceleration**: If you provide an external reasoning API key (or local LLM), Ripple's `generate_safe_plan` tool can pre-generate complete diff roadmaps directly inside the graph response.
+- 🔒 **100% Private & Local-First**: Your code AST is indexed locally or into your private FalkorDB instance—no proprietary code is ever leaked to third-party APIs.
+
 ```mermaid
 flowchart TD
     subgraph TargetRepo["1. Target Codebase"]
@@ -118,7 +127,7 @@ Please install and set up Ripple for this workspace by performing the following 
    In `.ripple/.env`, set:
    FALKOR_HOST=localhost (or your FalkorDB Cloud host)
    FALKOR_PORT=6379 (or your FalkorDB Cloud port)
-   SARVAM_API_KEY=<your_api_key>
+   # (Optional) SARVAM_API_KEY=<your_api_key> (only if you want external LLM pre-planning; otherwise your agent's own intelligence is used!)
 
 4. Index this repository into FalkorDB:
    node .ripple/dist/cli.js index .
