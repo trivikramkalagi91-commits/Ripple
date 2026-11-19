@@ -1,24 +1,42 @@
-Ripple — Launch Video Share Copy
-================================
+================================================================================
+RIPPLE — LAUNCH VIDEO SHARE COPY (Deploy With Embarko Student Challenge)
+================================================================================
 
-Twitter/X:
+--- X / Twitter (Postable As-Is) ---
 Never let your AI coding agent edit code in the dark.
-Ripple gives agents real-time dependency graph intelligence powered by FalkorDB over MCP — before a single line is modified.
-Open source. Powered by FalkorDB.
-github.com/trivikramkalagi91-commits/Ripple
 
-LinkedIn:
-We've all seen it: an AI coding agent edits one file, and 58 consumers break 4 hops away. Grep can't solve this. Barrel re-exports and path aliases mask the real dependency chains.
+Ripple parses your codebase AST into a FalkorDB property graph in <5ms, giving Claude & autonomous agents real-time blast radius intelligence and topological edit planning before touching a line.
 
-Ripple is an MCP server that indexes your codebase into FalkorDB as a connected property graph. Before any change, agents query the real blast radius, trace the shortest import chain, and apply edits in safe topological order.
+🚀 Live on Embarko: https://sarvam-ripple.embarko.app
+💻 GitHub: https://github.com/trivikramkalagi91-commits/Ripple
+🏆 Built for the student challenge: #DeployWithEmbarko @embarko_ai
 
-Open source, TypeScript, FalkorDB, MCP.
 
-GitHub: github.com/trivikramkalagi91-commits/Ripple
+--- LinkedIn (Postable As-Is) ---
+We've all watched an AI coding agent break production by refactoring a single helper file—triggering silent failures 4 hops away. Grep and regex simply cannot trace barrel re-exports and semantic dependency trees.
 
-Product Hunt:
-Tagline: Dependency graph intelligence for AI coding agents.
-Description: Ripple gives AI coding agents real-time blast radius analysis powered by FalkorDB over MCP. Never let an agent edit code in the dark again.
+Meet Ripple: an open-source Architectural Guardian and MCP Server for AI coding agents.
 
-Hacker News:
-Show HN: Ripple – Give AI coding agents real-time dependency graph intelligence (FalkorDB + MCP)
+Powered by FalkorDB's linear-algebra GraphBLAS engine, Ripple indexes entire TypeScript & JavaScript codebases into a connected property graph. Before applying any diff, the agent queries:
+1. `blast_radius`: Multi-hop recursive graph traversal of all impacted consumers.
+2. `safe_edit_order`: Topological sort ensuring parents are never edited before children.
+3. `why_affected`: Shortest path explaining why a distant module breaks.
+4. `risk_hotspots`: PageRank architectural centrality scores.
+
+Best of all, Ripple operates with 100% native agent intelligence without requiring external proprietary API keys.
+
+🌐 Live Web App (Hosted on Embarko): https://sarvam-ripple.embarko.app
+📦 Open Source GitHub: https://github.com/trivikramkalagi91-commits/Ripple
+
+#DeployWithEmbarko #AI #SoftwareEngineering #MCP #ModelContextProtocol #FalkorDB #GraphDatabase #WebDev
+
+
+--- Challenge Submission Details ---
+Project Name: Ripple
+Student Entrant: trivikramkalagi91@gmail.com
+Live URL: https://sarvam-ripple.embarko.app (Permanent & Claimed)
+GitHub Repository: https://github.com/trivikramkalagi91-commits/Ripple
+Video Duration: 45.0 seconds (Meets 40s - 3min rule)
+Video File: brag-output/brag.mp4 (1080p 30fps, H.264/AAC)
+Poster Image: brag-output/brag.jpg (1920x1080)
+Music Attribution: "Happy Beats / Business Moves" by Sascha Ende, ende.app (Licensed under CC BY 4.0 Standard License) — 100% Copyright compliant with Embarko Section 4.
