@@ -1,7 +1,7 @@
 {
-  "name": "sarvam-ripple",
+  "name": "ripple",
   "version": "1.0.0",
-  "description": "FalkorDB-powered dependency graph & Sarvam AI architectural safe-plan engine for AI coding agents",
+  "description": "FalkorDB-powered dependency graph & architectural safe-plan engine for AI coding agents",
   "main": "dist/index.js",
   "bin": {
     "ripple": "dist/cli.js"
@@ -16,13 +16,12 @@
   "keywords": [
     "mcp",
     "falkordb",
-    "sarvam-ai",
     "graph",
     "blast-radius",
     "code-intelligence",
     "safe-edit-order"
   ],
-  "author": "Trivikram Kalagi, Suhas Hannamanavar",
+  "author": "Trivikram Kalagi",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1",
