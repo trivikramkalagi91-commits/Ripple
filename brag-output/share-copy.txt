@@ -7,7 +7,7 @@ Never let your AI coding agent edit code in the dark.
 
 Ripple parses your codebase AST into a FalkorDB property graph in <5ms, giving Claude & autonomous agents real-time blast radius intelligence and topological edit planning before touching a line.
 
-🚀 Live on Embarko: https://sarvam-ripple.embarko.app
+🚀 Live on Embarko: https://ripple.embarko.app
 💻 GitHub: https://github.com/trivikramkalagi91-commits/Ripple
 🏆 Built for the student challenge: #DeployWithEmbarko @embarko_ai
 
@@ -25,7 +25,7 @@ Powered by FalkorDB's linear-algebra GraphBLAS engine, Ripple indexes entire Typ
 
 Best of all, Ripple operates with 100% native agent intelligence without requiring external proprietary API keys.
 
-🌐 Live Web App (Hosted on Embarko): https://sarvam-ripple.embarko.app
+🌐 Live Web App (Hosted on Embarko): https://ripple.embarko.app
 📦 Open Source GitHub: https://github.com/trivikramkalagi91-commits/Ripple
 
 #DeployWithEmbarko #AI #SoftwareEngineering #MCP #ModelContextProtocol #FalkorDB #GraphDatabase #WebDev
@@ -34,7 +34,7 @@ Best of all, Ripple operates with 100% native agent intelligence without requiri
 --- Challenge Submission Details ---
 Project Name: Ripple
 Student Entrant: trivikramkalagi91@gmail.com
-Live URL: https://sarvam-ripple.embarko.app (Permanent & Claimed)
+Live URL: https://ripple.embarko.app (Permanent & Claimed)
 GitHub Repository: https://github.com/trivikramkalagi91-commits/Ripple
 Video Duration: 45.0 seconds (Meets 40s - 3min rule)
 Video File: brag-output/brag.mp4 (1080p 30fps, H.264/AAC)

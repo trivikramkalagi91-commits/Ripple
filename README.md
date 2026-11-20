@@ -7,12 +7,12 @@
   <h1>Ripple</h1>
   <p><strong>FalkorDB-Powered Dependency Graph & Architectural Intelligence Guardian for AI Coding Agents</strong></p>
   <p>
-    <a href="https://sarvam-ripple.embarko.app"><img src="https://img.shields.io/badge/Hosted%20on-Embarko%20Cloud-171a1e?style=for-the-badge&logo=rocket&logoColor=white" alt="Hosted on Embarko" /></a>
+    <a href="https://ripple.embarko.app"><img src="https://img.shields.io/badge/Hosted%20on-Embarko%20Cloud-171a1e?style=for-the-badge&logo=rocket&logoColor=white" alt="Hosted on Embarko" /></a>
     <a href="https://github.com/trivikramkalagi91-commits/Ripple"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License" /></a>
     <a href="https://www.falkordb.com/"><img src="https://img.shields.io/badge/Powered%20By-FalkorDB-dc2626.svg?style=for-the-badge" alt="FalkorDB" /></a>
   </p>
   <p>
-    <a href="https://sarvam-ripple.embarko.app"><strong>🌐 Live on Embarko</strong></a> &bull;
+    <a href="https://ripple.embarko.app"><strong>🌐 Live on Embarko</strong></a> &bull;
     <a href="https://sarvam-ripple.vercel.app"><strong>🌐 Live on Vercel</strong></a> &bull;
     <a href="https://github.com/trivikramkalagi91-commits/Ripple"><strong>GitHub Repository</strong></a> &bull;
     <a href="https://www.falkordb.com/"><strong>FalkorDB</strong></a> &bull;
@@ -25,7 +25,7 @@
 ## ☁️ Instant Cloud Deployment via Embarko
 
 Ripple is deployed directly on **[Embarko](https://embarko.ai)** (`#DeployWithEmbarko`), enabling zero-friction, containerless cloud hosting for developer tools:
-- 🚀 **Live Production URL**: [https://sarvam-ripple.embarko.app](https://sarvam-ripple.embarko.app)
+- 🚀 **Live Production URL**: [https://ripple.embarko.app](https://ripple.embarko.app)
 - ⚡ **Zero-Dockerfile Architecture**: Directly deploys modern frontend and web tools with zero container overhead or complex manifests.
 - 🛡️ **Permanent & Claimed**: Authenticated, securely routed, and served via instant edge networking.
 

@@ -55,7 +55,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Render launch video")
     parser.add_argument("--project-name", default="Ripple")
     parser.add_argument("--tagline", default="Dependency Graph Intelligence for AI Coding Agents")
-    parser.add_argument("--live-url", default="https://sarvam-ripple.embarko.app")
+    parser.add_argument("--live-url", default="https://ripple.embarko.app")
     parser.add_argument("--repo-url", default="github.com/trivikramkalagi91-commits/Ripple")
     parser.add_argument("--hashtag", default="#DeployWithEmbarko")
     parser.add_argument("--duration", type=float, default=45.0)

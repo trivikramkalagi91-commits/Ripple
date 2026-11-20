@@ -22,7 +22,7 @@ Execute the bundled Python script:
 python .agents/skills/launch-video/scripts/render_video.py `
   --project-name "Ripple" `
   --tagline "Dependency Graph Intelligence for AI Coding Agents" `
-  --live-url "https://sarvam-ripple.embarko.app" `
+  --live-url "https://ripple.embarko.app" `
   --repo-url "github.com/trivikramkalagi91-commits/Ripple" `
   --hashtag "#DeployWithEmbarko" `
   --duration 45.0 `

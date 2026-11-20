@@ -366,14 +366,14 @@ def render_scene_4(t, frame_idx):
     
     draw.rounded_rectangle([100, 240, 950, 330], radius=16, fill=(244, 243, 241), outline=pulse_col, width=3)
     draw.ellipse([135, 275, 155, 295], fill=pulse_col)
-    draw.text((175, 267), "https://sarvam-ripple.embarko.app", fill=(26, 28, 26), font=font_mono_lg)
+    draw.text((175, 267), "https://ripple.embarko.app", fill=(26, 28, 26), font=font_mono_lg)
     draw.rounded_rectangle([820, 260, 920, 310], radius=8, fill=pulse_col)
     draw.text((840, 272), "LIVE", fill=(255, 255, 255), font=font_sans_sm)
     
     # 4 Highlights of Embarko Hosting
     highlights = [
         ("⚡ Instant Edge Deployment", "Continuous auto-deployment directly from git commits. No custom Dockerfiles or Kubernetes manifests required."),
-        ("🌐 Permanent Public Domain", "Claimed and permanently routed at sarvam-ripple.embarko.app with instant TLS encryption."),
+        ("🌐 Permanent Public Domain", "Claimed and permanently routed at ripple.embarko.app with instant TLS encryption."),
         ("🛡️ Verified Student Submission", "Built for the Deploy With Embarko Student Challenge with full compliance."),
         ("📊 Live Real-time Status", "HTTP 200 OK — serving the interactive web dashboard and MCP status 24/7.")
     ]
@@ -468,7 +468,7 @@ def render_scene_5(t, frame_idx):
     # Live URL Button
     draw.rounded_rectangle([card_x1 + 120, link_y, card_x1 + 750, link_y + 110], radius=16, fill=(244, 243, 241), outline=(99, 102, 241), width=2)
     draw.text((card_x1 + 150, link_y + 18), "🌐 LIVE WEB APPLICATION:", fill=(99, 102, 241), font=font_sans_sm)
-    draw.text((card_x1 + 150, link_y + 52), "https://sarvam-ripple.embarko.app", fill=(26, 28, 26), font=font_mono_md)
+    draw.text((card_x1 + 150, link_y + 52), "https://ripple.embarko.app", fill=(26, 28, 26), font=font_mono_md)
     
     # GitHub URL Button
     draw.rounded_rectangle([card_x1 + 780, link_y, card_x2 - 120, link_y + 110], radius=16, fill=(244, 243, 241), outline=(16, 185, 129), width=2)

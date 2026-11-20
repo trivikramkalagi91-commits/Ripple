@@ -7,7 +7,7 @@
 - **Format:** Landscape 1920×1080 @ 30fps
 - **Duration:** 45.0 seconds (1,350 frames) — Satisfies Embarko Rule 3 (40s to 3m duration requirement)
 - **Audio Track:** `happy-beats-business-moves-vol-10-by-ende-dot-app.mp3` (Tempo: 109.96 BPM, CC BY 4.0 Sascha Ende)
-- **Deployment Platform:** Embarko (`https://sarvam-ripple.embarko.app`)
+- **Deployment Platform:** Embarko (`https://ripple.embarko.app`)
 - **Repository:** `github.com/trivikramkalagi91-commits/Ripple`
 
 ## Key Positioning & Narrative Arc
@@ -23,7 +23,7 @@
    - Zero hallucinations: agent edits dependencies in exact reverse topological order (`types` -> `components` -> `pages`).
    - Works with native agent intelligence (no proprietary API lock-in required).
 4. **Deployed on Embarko (27.0s – 37.0s):**
-   - Showcase the production deployment live on Embarko at `https://sarvam-ripple.embarko.app`.
+   - Showcase the production deployment live on Embarko at `https://ripple.embarko.app`.
    - Instant deployment, zero Dockerfile complexity, fast global edge hosting.
    - Featuring the official Embarko logo and challenge hashtag `#DeployWithEmbarko`.
 5. **Outro & Call to Action (37.0s – 45.0s):**
